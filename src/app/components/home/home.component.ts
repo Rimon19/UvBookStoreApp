@@ -1,3 +1,5 @@
+import { BookInfo } from './../../../../models/Angular/BookInfo';
+
 import { HomeService } from './../../home.service';
 import { BookInfoService } from './../../book-info.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,25 +13,30 @@ import { fromEventPattern } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private homeService:HomeService) {
-    
-  
-    homeService.getAllUser()  
-    .subscribe(item=>{
-      console.log(item)
-    })
+book=new BookInfo();
+data: BookInfo[] = [];
+  constructor(private bookInfoService:BookInfoService) {
+   
+   
    }
 
   ngOnInit() {
+    this.bookInfoService.getAllBookInfo()
+    .subscribe(res => {
+      this.data = res;
+      console.log(this.data);
+     // this.isLoadingResults = false;
+    }, err => {
+      console.log(err);
+     // this.isLoadingResults = false;
+    });
   }
 
-  testMethod(){
+  
+  save(objBook){
+    console.log(objBook)
+    this.bookInfoService.insertBookInfo(objBook).subscribe(data=>{console.log(data)});
 
- //console.log(db);
-   
-
-
- }
+  }
 
 }

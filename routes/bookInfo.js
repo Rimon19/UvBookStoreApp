@@ -1,11 +1,11 @@
 const express = require('express');
 const router=express.Router();
-//const db =  require('../models/index');
-const Book =  require('../models/Book');
+const db =  require('../models/index');
+
 
 //get 
 router.get('/',(req,res)=>
-Book.findAll().then(book => {
+db.BookInf.findAll().then(book => {
 
   res.send(book);
 })
@@ -13,26 +13,41 @@ Book.findAll().then(book => {
 )
 //get by id
 router.get('/:id',(req, res) => {	
-	Book.findById(req.params.id).then(book => {
+	db.BookInf.findById(req.params.id).then(book => {
 		res.send(book);
 	})
 });
 //post
-router.post('/add',(req, res) => {	
-	// Save to MySQL database
-	Book.create({  
-	  title: req.body.title,
-	  price: req.body.price,
-	  publication: req.body.publication
+router.post('/save',(req, res) => {	
+	
+data=(req.body);
+
+	db.BookInf.create({  
+	  name: data.name,
+	  basePrice: data.basePrice,
+		category: data.category,
+		image: data.image,
+		publisher: data.publisher,
+		publicherYear: data.publicherYear,
+		author: data.author
 	}).then(book => {		
 		// Send created book to client
-		res.send(book);
+		res.send('1 row affected');
 	});
+
 });
 //put
 router.get('/edit',(req, res) => {
 	const id = req.params.id;
-	Book.update( { title: req.body.title, price: req.body.price, publication: req.body.publication }, 
+	db.BookInf.update( {
+		name: req.body.name,
+	  basePrice: req.body.basePrice,
+		category: req.body.category,
+		image: req.body.image,
+		publisher: req.body.publisher,
+		publicherYear: req.body.publicherYear,
+		author: req.body.author
+		}, 
 					 { where: {id: req.params.id} }
 				   ).then(() => {
 					 res.status(200).send("updated successfully a customer with id = " + id);
@@ -43,7 +58,7 @@ router.get('/edit',(req, res) => {
 //delete
 router.delete('/delete',exports.delete = (req, res) => {
 	const id = req.params.id;
-	Book.destroy({
+	db.BookInf.destroy({
 	  where: { id: id }
 	}).then(() => {
 	  res.status(200).send('deleted successfully a book with id = ' + id);

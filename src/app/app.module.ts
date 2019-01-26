@@ -19,7 +19,14 @@ import { WebviewDirective } from './directives/webview.directive';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { BookInfoComponent } from './book-info/book-info.component';
-
+import { RouterModule } from '@angular/router';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
+import { DisplayBooksInfoComponent } from './display-books-info/display-books-info.component';
+import { ClientInputFormComponent } from './client-input-form/client-input-form.component';
+import { DisplayClientsInfoComponent } from './display-clients-info/display-clients-info.component';
+import { CategoryInputFormComponent } from './category-input-form/category-input-form.component';
+import { DisplayCategoryInfosComponent } from './display-category-infos/display-category-infos.component'; 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,13 +37,58 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     WebviewDirective,
-    BookInfoComponent
+    BookInfoComponent,
+    AppHeaderComponent,
+    AppFooterComponent,
+    DisplayBooksInfoComponent,
+    ClientInputFormComponent,
+    DisplayClientsInfoComponent,
+    CategoryInputFormComponent,
+    DisplayCategoryInfosComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    RouterModule.forRoot([
+      {
+         path: 'h',
+       component: HomeComponent ,
+        
+      },
+      {
+        path: 'BookEntry',
+      component: BookInfoComponent ,
+       
+     },
+     {
+      path: 'displayBooksInfo',
+    component: DisplayBooksInfoComponent ,
+     
+      },
+      {
+        path: 'categoryInputForm',
+      component: CategoryInputFormComponent ,
+       
+        },
+        {
+          path: 'displayCategoryInfo',
+        component: DisplayCategoryInfosComponent ,
+         
+         },
+
+         {
+          path: 'clientInputForm',
+        component: ClientInputFormComponent ,
+         
+         },
+         {
+          path: 'displayClientsInfos',
+        component: DisplayClientsInfoComponent ,
+         
+         }
+    ]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

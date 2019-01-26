@@ -16,9 +16,9 @@
 
  //get
  router.get('/', function(req, res) {
-user.create({
-    firstName:'jack'
-}).then(u=>console.log('work!'))
+// user.create({
+//     firstName:'jack'
+// }).then(u=>console.log('work!'))
     res.send(courses);
   });
 //specific get
@@ -34,20 +34,23 @@ user.create({
   router.post('/',(req,res)=>{
    
 
-    const scema={
-        name:Joi.string().min(3).required()
-    }
+    // const scema={
+    //     name:Joi.string().min(3).required()
+    // }
 
-     const result=Joi.validate(req.body,scema)
-    if(result.error){
-        res.Status(400).send(result.error.details[0].message);
-        return;
-    }
+    //  const result=Joi.validate(req.body,scema)
+    // if(result.error){
+    //     res.Status(400).send(result.error.details[0].message);
+    //     return;
+    // }
+    
    const course={
-       id:courses.length+1,
+       id:req.body.id,
        name:req.body.name
+      
    }
      courses.push(course);
+     console.log(course);
      req.send(course);
   })
 
@@ -58,12 +61,12 @@ user.create({
 
   
 
-     const {error}=Joi.validate(req.body)
+    // const {error}=Joi.validate(req.body)
 
-  if(error){
-      res.Status(400).send(error.details[0].message);
-      return;
-  }
+  //if(error){
+   //   res.Status(400).send(error.details[0].message);
+    //  return;
+  //}
 
   //update here
   course.name=res.body.name;
