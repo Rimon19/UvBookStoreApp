@@ -25,7 +25,13 @@
               "src/favicon.512x512.png"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/theme/default.css",
+              "src/assets/css/app.css",
+              "src/assets/css/helper.css",
+              "src/assets/css/responsive.css",
+              "src/assets/node_modules/animate.css/animate.min.css",
+              "src/assets/node_modules/materialize-css/dist/css/materialize.min.css"
             ],
             "scripts": []
           },
