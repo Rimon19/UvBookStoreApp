@@ -33,7 +33,12 @@
               "src/assets/node_modules/animate.css/animate.min.css",
               "src/assets/node_modules/materialize-css/dist/css/materialize.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/node_modules/jquery/dist/jquery.min.js",
+              "src/assets/node_modules/materialize-css/dist/js/materialize.min.js",
+              "src/assets/js/app.js",
+              "src/assets/js/search.js"
+            ]
           },
           "configurations": {
             "dev": {
