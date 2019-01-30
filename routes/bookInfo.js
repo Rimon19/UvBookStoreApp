@@ -1,7 +1,8 @@
 const express = require('express');
 const router=express.Router();
 const db =  require('../models/index');
-
+ var fs = require('fs');
+ //var imageData = fs.readFileSync('../image');
 
 //get 
 router.get('/',(req,res)=>
@@ -25,7 +26,7 @@ data=(req.body);
 	db.BookInf.create({  
 	  name: data.name,
 	  basePrice: data.basePrice,
-		category: data.category,
+		categoryId: data.categoryId,
 		image: data.image,
 		publisher: data.publisher,
 		publicherYear: data.publicherYear,
@@ -33,6 +34,11 @@ data=(req.body);
 	}).then(book => {		
 		// Send created book to client
 		res.send('1 row affected');
+		try{
+			fs.writeFileSync('../image', data.image);				
+		}catch(e){
+			console.log(e);
+		}
 	});
 
 });
@@ -42,7 +48,7 @@ router.get('/edit',(req, res) => {
 	db.BookInf.update( {
 		name: req.body.name,
 	  basePrice: req.body.basePrice,
-		category: req.body.category,
+		categoryId: req.body.categoryId,
 		image: req.body.image,
 		publisher: req.body.publisher,
 		publicherYear: req.body.publicherYear,

@@ -5,42 +5,43 @@
        
         <form action="#" class="col s12">
             <div class="row">
-                <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                <!-- <div class="input-field col s6">
+                    <input #name="ngModel" [(ngModel)]="client.name" name="name" id="name"  placeholder="Placeholder" type="text" class="validate">
                     <label for="first_name">Client ID: </label>
-                </div>
+                </div> -->
                 <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate">
+                    <input #name="ngModel" [(ngModel)]="client.name" name="name" id="name" type="text" class="validate">
                     <label for="last_name">Client Name</label>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input #address="ngModel" [(ngModel)]="client.address" name="address" id="address" placeholder="Placeholder" type="text" class="validate">
                     <label for="first_name">Address </label>
                 </div>
                 <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input #mobile="ngModel" [(ngModel)]="client.mobile" name="mobile" id="mobile" placeholder="Placeholder"  type="text" class="validate">
                     <label for="first_name">Mobile No </label>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input #dueAmount="ngModel" [(ngModel)]="client.dueAmount" name="dueAmount" id="dueAmount" placeholder="Placeholder"  type="text" class="validate">
                     <label for="first_name">Due Amount </label>
                 </div>
                 <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input #advanceAmount="ngModel" [(ngModel)]="client.advanceAmount" name="advanceAmount" id="advanceAmount" placeholder="Placeholder" id="first_name" type="text" class="validate">
                     <label for="first_name">Advance Amount</label>
                 </div>
             </div>
 
 
-
+            <input type="hidden" #ClientId="ngModel" [(ngModel)]="client.ClientId" name="ClientId">
             <div class="card-body ui-app__button-demo">
-                <a class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+                <a *ngIf="!id" (click)="save(client)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+                <a *ngIf="id" (click)="update(client)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Update</a>
             </div>
 
         </form>

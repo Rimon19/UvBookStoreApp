@@ -33,10 +33,6 @@ data: BookInfo[] = [];
   }
 
   
-  save(objBook){
-    console.log(objBook)
-    this.bookInfoService.insertBookInfo(objBook).subscribe(data=>{console.log(data)});
-
-  }
+ 
 
 }

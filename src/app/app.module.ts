@@ -26,7 +26,8 @@ import { DisplayBooksInfoComponent } from './display-books-info/display-books-in
 import { ClientInputFormComponent } from './client-input-form/client-input-form.component';
 import { DisplayClientsInfoComponent } from './display-clients-info/display-clients-info.component';
 import { CategoryInputFormComponent } from './category-input-form/category-input-form.component';
-import { DisplayCategoryInfosComponent } from './display-category-infos/display-category-infos.component'; 
+import { DisplayCategoryInfosComponent } from './display-category-infos/display-category-infos.component';
+import { BillingComponent } from './billing/billing.component'; 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,7 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ClientInputFormComponent,
     DisplayClientsInfoComponent,
     CategoryInputFormComponent,
-    DisplayCategoryInfosComponent
+    DisplayCategoryInfosComponent,
+    BillingComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,11 @@ export function HttpLoaderFactory(http: HttpClient) {
        
         },
         {
+          path: 'categoryInputForm/:id',
+        component: CategoryInputFormComponent ,
+         
+          },
+        {
           path: 'displayCategoryInfo',
         component: DisplayCategoryInfosComponent ,
          
@@ -84,8 +91,18 @@ export function HttpLoaderFactory(http: HttpClient) {
          
          },
          {
+          path: 'clientInputForm/:id',
+        component: ClientInputFormComponent ,
+         
+         },
+         {
           path: 'displayClientsInfos',
         component: DisplayClientsInfoComponent ,
+         
+         },
+         {
+          path: 'billing',
+        component: BillingComponent ,
          
          }
     ]),

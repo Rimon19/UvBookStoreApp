@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
    
     name: DataTypes.STRING,
     basePrice: DataTypes.INTEGER,
-    category: DataTypes.STRING,
+    categoryId: DataTypes.INTEGER,
     image: DataTypes.BLOB,
     publisher: DataTypes.STRING,
     publicherYear: DataTypes.STRING,
@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   BookInf.associate = function(models) {
     // associations can be defined here
+    BookInf.belongsTo(models.Category, {
+      foreignKey: 'categoryId',
+      onDelete: 'CASCADE'
+    })
   };
   return BookInf;
 };

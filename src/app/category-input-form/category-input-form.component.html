@@ -2,17 +2,18 @@
   <h4>Category Input Form</h4>
   <br>
 
-  <form action="#" class="col s12">
+  <form  class="col s12">
       <div class="row">
           <div class="input-field col s6">
-              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+              <input #categoryName="ngModel" [(ngModel)]="category.categoryName" name="categoryName" id="categoryName"   type="text" class="validate">
               <label for="first_name">Category Name </label>
           </div>
 
       </div>
 
       <div class="card-body ui-app__button-demo">
-          <a class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+          <a *ngIf="!id" (click)="save(category)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+          <a *ngIf="id" (click)="update(category)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Update</a>
       </div>
 
   </form>

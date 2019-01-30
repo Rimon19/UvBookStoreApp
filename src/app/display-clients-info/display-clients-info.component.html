@@ -20,13 +20,14 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr>
-                              <td>12</td>
-                              <td>Saifurs</td>
-                              <td>01700-000000</td>
-                              <td>40897 Tk</td>
-                              <td>0 Tk</td>
-
+                          <tr *ngFor="let client of clients">
+                              <td>{{client.ClientId}}</td>
+                              <td>{{client.name}}</td>
+                              <td>{{client.mobile}}</td>
+                              <td>{{client.dueAmount}}</td>
+                              <td>{{client.advanceAmount}}</td>
+                              <td><a [routerLink]="['/clientInputForm/', client.id]">Edit</a></td> 
+                              <td> <a (click)="delete(client.id)">Delete</a></td>
                           </tr>
 
 

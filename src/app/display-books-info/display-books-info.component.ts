@@ -1,4 +1,6 @@
+import { BookInfoService } from './../book-info.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-display-books-info',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display-books-info.component.scss']
 })
 export class DisplayBooksInfoComponent implements OnInit {
+books=[];
 
-  constructor() { }
+  constructor(private bookService:BookInfoService) { 
+    bookService.getAllBookInfo()
+    .subscribe(res => {
+      this.books = res;     
+      this.books.forEach(element => {
+     
+        console.log(element.image)
+      });
+    }, err => {
+      console.log(err);
+    });
+  }
 
   ngOnInit() {
   }
+
+ 
 
 }

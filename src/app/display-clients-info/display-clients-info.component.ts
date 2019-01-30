@@ -1,3 +1,4 @@
+import { ClientService } from './../client.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display-clients-info.component.scss']
 })
 export class DisplayClientsInfoComponent implements OnInit {
+  clients=[];
+  constructor(private clientService:ClientService) {
 
-  constructor() { }
+    clientService.getAllClient()
+    .subscribe(res => {
+      this.clients = res;
+     
+    }, err => {
+    });
+   }
 
   ngOnInit() {
+  }
+  delete(id){
+   
+   
+    this.clientService.deleteClient(id).subscribe(data=>{
+      
+    })
+   
   }
 
 }

@@ -16,11 +16,11 @@ export class BookInfoService {
   }
 
   getBookInfo(id: string): Observable<BookInfo> {
-    return this.http.get<any>('http://localhost:3000/api/books/'+1);
+    return this.http.get<any>('http://localhost:3000/api/books/'+id);
   }
 
   insertBookInfo(bookInfo: BookInfo): Observable<BookInfo> {
-    console.log('from services:',bookInfo)
+
     return this.http.post<BookInfo>('http://localhost:3000/api/books/save', bookInfo);
   }
 
