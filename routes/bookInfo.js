@@ -1,8 +1,20 @@
 const express = require('express');
 const router=express.Router();
 const db =  require('../models/index');
- var fs = require('fs');
- //var imageData = fs.readFileSync('../image');
+const multer=require('multer');
+const path=require('path');
+
+
+const storage=multer.diskStorage({
+	destination:'../public/uploads/',
+	filename:function(req,res,cb){
+		cb(null,file.fieldname+'-'+Date.now()+
+		path.extname(file.originalname));
+	}
+})
+
+//init upload
+
 
 //get 
 router.get('/',(req,res)=>
@@ -20,8 +32,18 @@ router.get('/:id',(req, res) => {
 });
 //post
 router.post('/save',(req, res) => {	
-	
+
 data=(req.body);
+// upload(req,res,(err)=>{
+// 	if(err){
+// 		console.log(err);
+// 	}else{
+// 		console.log(data.image);
+// 	}
+// })
+// multer({
+// 	storage:data.image
+// }).single('myImage');
 
 	db.BookInf.create({  
 	  name: data.name,
@@ -34,11 +56,7 @@ data=(req.body);
 	}).then(book => {		
 		// Send created book to client
 		res.send('1 row affected');
-		try{
-			fs.writeFileSync('../image', data.image);				
-		}catch(e){
-			console.log(e);
-		}
+	
 	});
 
 });

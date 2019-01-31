@@ -13,7 +13,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+app.use(express.static('./public'));
 app.use(express.json());
 
 app.use(helmet());
