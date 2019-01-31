@@ -1,7 +1,8 @@
 <div class="row">
-  <h4>Book Input Form</h4>
-  <br>
+    <h4>Book Input Form</h4>
+    <br>
 
+<<<<<<< HEAD
   <form action="#" class="col s12" enctype="multipart/form-data">
       <div class="row">
           <div class="input-field col s6">
@@ -13,18 +14,32 @@
               <label for="last_name">Book Name</label>
           </div>
       </div>
+=======
+    <form action="#" class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input placeholder="Placeholder" type="text" class="validate">
+                <label for="first_name">Book ID: </label>
+            </div>
+            <div class="input-field col s6">
+                <input #name="ngModel" [(ngModel)]="book.name" name="name" id="name" type="text" class="validate">
+                <label for="last_name">Book Name</label>
+            </div>
+        </div>
+>>>>>>> a62b4c0b62c18f06291027b9f93edd53339b1ecb
 
-      <div class="row">
-          <div class="input-field col s6">
-              <input #basePrice="ngModel" [(ngModel)]="book.basePrice" name="basePrice" placeholder="Placeholder" id="basePrice" type="text" class="validate">
-              <label for="first_name">Base Price </label>
-          </div>
-          <!-- <div class="input-field col s6">
+        <div class="row">
+            <div class="input-field col s6">
+                <input #basePrice="ngModel" [(ngModel)]="book.basePrice" name="basePrice" placeholder="Placeholder" id="basePrice"
+                    type="text" class="validate">
+                <label for="first_name">Base Price </label>
+            </div>
+            <!-- <div class="input-field col s6">
               <input  placeholder="Placeholder" id="first_name" type="text" class="validate">
               <label for="first_name">Category </label>
           </div> -->
 
-          <!-- <div class="input-field col s6">
+            <!-- <div class="input-field col s6">
             <label for="categoryId">Category</label>
             <select #categoryId="ngModel" [(ngModel)]="book.categoryId" name="categoryId" id="categoryId" class="validate" >
               <option value=""></option>
@@ -35,56 +50,58 @@
             
         </div> -->
 
-        <div class="input-field col s6">
+            <div class="col s6">
 
-            <select>
-                <option value="" disabled selected>Select Category</option>
-                <option value="1">Hnrs 1st year</option>
-                <option value="2">Hnrs 3rd year</option>
-                <option value="3">MBA</option>
-            </select>
-            <label>Select Category</label>
+                <select class="browser-default">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="1">Hnrs 1st year</option>
+                    <option value="2">Hnrs 3rd year</option>
+                    <option value="3">MBA</option>
+                </select>
+
+
+            </div>
 
         </div>
 
-      </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input #publisher="ngModel" [(ngModel)]="book.publisher" name="publisher" placeholder="Placeholder" id="publisher"
+                    type="text" class="validate">
+                <label for="publisher">Publisher </label>
+            </div>
+            <div class="input-field col s6">
+                <input #publicherYear="ngModel" [(ngModel)]="book.publicherYear" name="publicherYear" placeholder="Placeholder"
+                    id="publicherYear" type="text" class="validate">
+                <label for="publicherYear">Published Year </label>
+            </div>
+        </div>
 
-      <div class="row">
-          <div class="input-field col s6">
-              <input #publisher="ngModel" [(ngModel)]="book.publisher" name="publisher"  placeholder="Placeholder" id="publisher" type="text" class="validate">
-              <label for="publisher">Publisher </label>
-          </div>
-          <div class="input-field col s6">
-              <input #publicherYear="ngModel" [(ngModel)]="book.publicherYear" name="publicherYear" placeholder="Placeholder" id="publicherYear" type="text" class="validate">
-              <label for="publicherYear">Published Year </label>
-          </div>
-      </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input #author="ngModel" [(ngModel)]="book.author" name="author" placeholder="Placeholder" id="author"
+                    type="text" class="validate">
+                <label for="first_name">Author: </label>
+            </div>
+            <div class="input-field col s6">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Select Image</span>
+                        <input type="file" (change)="selectFile($event)">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
 
-      <div class="row">
-          <div class="input-field col s6">
-              <input #author="ngModel" [(ngModel)]="book.author" name="author" placeholder="Placeholder" id="author" type="text" class="validate">
-              <label for="first_name">Author: </label>
-          </div>
-          <div class="input-field col s6">
-              <div class="file-field input-field">
-                  <div class="btn">
-                      <span>Select Image</span>
-                      <input type="file" (change)="selectFile($event)">
-                  </div>
-                  <div class="file-path-wrapper">
-                      <input class="file-path validate" type="text">
-                  </div>
-              </div>
-          </div>
+        </div>
 
-      </div>
+        <div class="card-body ui-app__button-demo">
+            <a (click)="save(book)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+        </div>
 
-      <div class="card-body ui-app__button-demo">
-          <a (click)="save(book)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
-      </div>
-
-  </form>
+    </form>
 
 
 </div>
-
