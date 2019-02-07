@@ -7,4 +7,15 @@ export class Client{
     paidAmount: number;
     dueAmount: number;
     advanceAmount: number;  
+
+    packingCoast:number;
+    commision:number;
+    currentDue:number;
+    total:number;
+    totalWithComiAndPackingCost:number;
+    totalWithPreviousDue:number;
+    finalTotal:number;
+   
+ 
+    billNo:string; 
 }

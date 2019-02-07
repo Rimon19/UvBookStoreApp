@@ -1,0 +1,12 @@
+<div class="input-field col s12">
+  <i class="material-icons prefix">search Client</i>
+  <input #query (keyup)="filterReportByBillNO(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients">
+</div>
+<table>
+  <tr *ngFor="let c of filteredBillNo">
+    <td>{{c.name}}</td>
+     <td>{{c.billNo}}</td>
+     <td> <a  class="waves-effect waves-light btn btn-rounded "  
+      style="font-size:20px" [routerLink]="['/ReportDetails/',c.billNo]">Search</a></td>
+  </tr>
+</table>

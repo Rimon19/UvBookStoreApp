@@ -2,7 +2,6 @@
     <h4>Book Input Form</h4>
     <br>
 
-<<<<<<< HEAD
   <form action="#" class="col s12" enctype="multipart/form-data">
       <div class="row">
           <div class="input-field col s6">
@@ -14,19 +13,6 @@
               <label for="last_name">Book Name</label>
           </div>
       </div>
-=======
-    <form action="#" class="col s12">
-        <div class="row">
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" type="text" class="validate">
-                <label for="first_name">Book ID: </label>
-            </div>
-            <div class="input-field col s6">
-                <input #name="ngModel" [(ngModel)]="book.name" name="name" id="name" type="text" class="validate">
-                <label for="last_name">Book Name</label>
-            </div>
-        </div>
->>>>>>> a62b4c0b62c18f06291027b9f93edd53339b1ecb
 
         <div class="row">
             <div class="input-field col s6">
@@ -39,18 +25,18 @@
               <label for="first_name">Category </label>
           </div> -->
 
-            <!-- <div class="input-field col s6">
+            <div class="col s6">
             <label for="categoryId">Category</label>
-            <select #categoryId="ngModel" [(ngModel)]="book.categoryId" name="categoryId" id="categoryId" class="validate" >
+            <select #categoryId="ngModel" [(ngModel)]="book.categoryId" name="categoryId" id="categoryId" class="browser-default" >
               <option value=""></option>
               <option *ngFor="let c of categories" [value]="c.id">
                 {{ c.categoryName }}
               </option>
             </select>
             
-        </div> -->
+        </div>
 
-            <div class="col s6">
+            <!-- <div class="col s6">
 
                 <select class="browser-default">
                     <option value="" disabled selected>Select Category</option>
@@ -60,7 +46,7 @@
                 </select>
 
 
-            </div>
+            </div> -->
 
         </div>
 

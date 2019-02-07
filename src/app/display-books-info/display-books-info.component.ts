@@ -10,14 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class DisplayBooksInfoComponent implements OnInit {
 books=[];
 
+
   constructor(private bookService:BookInfoService) { 
     bookService.getAllBookInfo()
     .subscribe(res => {
       this.books = res;     
-      this.books.forEach(element => {
+      // this.books.forEach(element => {
      
-        console.log(element.image)
-      });
+      //   console.log(element.image)
+      // });
     }, err => {
       console.log(err);
     });

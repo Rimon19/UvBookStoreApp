@@ -1,25 +1,11 @@
 const express = require('express');
 const router=express.Router();
 const db =  require('../models/index');
-const multer=require('multer');
-const path=require('path');
-
-
-const storage=multer.diskStorage({
-	destination:'../public/uploads/',
-	filename:function(req,res,cb){
-		cb(null,file.fieldname+'-'+Date.now()+
-		path.extname(file.originalname));
-	}
-})
-
-//init upload
-
 
 //get 
 router.get('/',(req,res)=>
 
-db.BookInf.findAll({
+db.bookReport.findAll({
 	
 })
 .then(book => {
@@ -29,7 +15,7 @@ db.BookInf.findAll({
 )
 //get by id
 router.get('/:id',(req, res) => {	
-	db.BookInf.findById(req.params.id).then(book => {
+	db.bookReport.findById(req.params.id).then(book => {
 		res.send(book);
 	})
 });
@@ -37,25 +23,19 @@ router.get('/:id',(req, res) => {
 router.post('/save',(req, res) => {	
 
 data=(req.body);
-// upload(req,res,(err)=>{
-// 	if(err){
-// 		console.log(err);
-// 	}else{
-// 		console.log(data.image);
-// 	}
-// })
-// multer({
-// 	storage:data.image
-// }).single('myImage');
 
-	db.BookInf.create({  
-	  name: data.name,
-	  basePrice: data.basePrice,
+
+	db.bookReport.create({  
+	    name: data.name,
+	    basePrice: data.basePrice,
 		categoryId: data.categoryId,
 		image: data.image,
 		publisher: data.publisher,
 		publicherYear: data.publicherYear,
-		author: data.author
+        author: data.author,
+        billNo:data.billNo,
+        discount:data.discount,
+        subTotal:data.subTotal
 	}).then(book => {		
 		// Send created book to client
 		res.send('1 row affected');
@@ -66,7 +46,7 @@ data=(req.body);
 //put
 router.get('/edit',(req, res) => {
 	const id = req.params.id;
-	db.BookInf.update( {
+	db.bookReport.update( {
 		name: req.body.name,
 	  basePrice: req.body.basePrice,
 		categoryId: req.body.categoryId,
@@ -85,7 +65,7 @@ router.get('/edit',(req, res) => {
 //delete
 router.delete('/delete',exports.delete = (req, res) => {
 	const id = req.params.id;
-	db.BookInf.destroy({
+	db.bookReport.destroy({
 	  where: { id: id }
 	}).then(() => {
 	  res.status(200).send('deleted successfully a book with id = ' + id);

@@ -7,4 +7,7 @@ export class BookInfo{
     publisher:string;
     publicherYear:string;
     author:string;
+    discount:number;
+    subTotal:number;
+    billNo:string;
 }

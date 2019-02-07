@@ -12,32 +12,47 @@
 </div>
 
 <div class="row">
-
     <div class="input-field col s12">
-        <i class="material-icons prefix">search</i>
-        <input type="text" id="autocomplete-input-country" placeholder="Search Clients">
+        <i class="material-icons prefix">search book</i>
+        <input #query (keyup)="filterBooks(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients">
     </div>
+    <table>
+        <tr *ngFor="let book of filteredBooks">
+           <td>{{book.name}}</td>
+           <td><button (click)="addList(book)">add list</button></td>
+        </tr>
+    </table>
+    <div class="input-field col s12">
+        <i class="material-icons prefix">search Client</i>
+        <input #query (keyup)="filterClients(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients">
+    </div>
+    <table>
+        <tr *ngFor="let c of filteredClients">
+           <td>{{c.name}}</td>
+           <td><button (click)="selectClient(c.id)">select client</button></td>
+        </tr>
+    </table>
 
 </div>
 
 <div class="row">
     <div class="input-field col s6">
-        <input id="first_name" type="text" class="validate">
+        <input #name="ngModel" [(ngModel)]="client.name" name="name"  id="name" type="text" class="validate">
         <label for="first_name">Client Name: </label>
     </div>
     <div class="input-field col s6">
-        <input id="last_name" type="text" class="validate">
+        <input #address="ngModel" [(ngModel)]="client.address" name="address" id="address" type="text" class="validate">
         <label for="last_name">Address: </label>
     </div>
 </div>
 
 <div class="row">
     <div class="input-field col s6">
-        <input id="first_name" type="text" class="validate">
+        <input #mobile="ngModel" [(ngModel)]="client.mobile" name="mobile" id="mobile" type="text" class="validate">
         <label for="first_name">Phone: </label>
     </div>
     <div class="input-field col s6">
-        <input id="last_name" type="text" class="validate">
+        <input #ClientId="ngModel" [(ngModel)]="client.ClientId" name="ClientId" id="ClientId" type="text" class="validate">
         <label for="last_name">ID: </label>
     </div>
 
@@ -57,7 +72,7 @@
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Sl</th>
+                               
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Category</th>
@@ -69,20 +84,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>3424</td>
-                                <td>System Architect</td>
-                                <td>Honours 4th year</td>
-                                <td>GIC Publication</td>
-                                <td>Elliot</td>
-                                <td>340 Tk</td>
+                            
+                            <tr  *ngFor="let newbook of newBookList">
+                                
+                                <td>{{newbook.id}}</td>
+                                <td>{{newbook.name}}</td>
+                                <td>{{newbook.categoryId}}</td>
+                                <td>{{newbook.publisher}}</td>
+                                <td>{{newbook.author}}</td>
+                                <td>{{newbook.basePrice}} Tk</td>
                                 <td>
-                                    <input id="Discount" type="text" class="validate" style="width:100px; margin-right:10px">
-                                    <a class="waves-effect waves-light btn btn-rounded ">Apply</a>
+                                    <input #discount="ngModel" [(ngModel)]="newbook.discount" name="discount"  id="discount" type="text" class="validate" style="width:100px; margin-right:10px">
+                                    <a (click)="updateBookList(newbook)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
 
                                 </td>
-                                <td>400</td>
+                                <td>{{newbook.subTotal}}</td>
                             </tr>
 
 
@@ -104,30 +120,32 @@
 <div class="row">
     <div class="col s9"></div>
     <div class="col s3">
-        <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">400 tk</span></p>
+        <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{total}} tk</span></p>
 
-        <p style="font-size:18px"><b>Packing: </b> <span style="margin-left:50px"><input id="last_name" type="text"
+        <p style="font-size:18px"><b>Packing: </b> <span style="margin-left:50px"><input #packingCoast="ngModel" [(ngModel)]="client.packingCoast" name="packingCoast" id="packingCoast" type="text"
                     class="validate" style="width: 70px"></span></p>
-        <p style="font-size:18px"><b>Commision: </b> <span style="margin-left:50px"><input id="last_name" type="text"
+        <p style="font-size:18px"><b>Commision: </b> <span style="margin-left:50px"><input #commision="ngModel" [(ngModel)]="client.commision" name="commision"  id="commision" type="text"
                     class="validate" style="width: 70px"></span></p>
+                    <a (click)="calculationWithPackinCoastAndCommision(client)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
+                    <hr>
+                    <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.totalWithComiAndPackingCost}} tk</span></p>
+
+        <p style="font-size:18px"><b>Previous Due: </b> <span style="margin-left:50px"><input #dueAmount="ngModel" [(ngModel)]="client.dueAmount" name="dueAmount" id="dueAmount" type="text"
+                    class="validate" style="width: 70px"></span></p>
+                    <a (click)="calculationWitPreviousDue(client)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
         <hr>
+        <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.totalWithPreviousDue}} tk</span></p>
 
-        <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">400 tk</span></p>
-
-        <p style="font-size:18px"><b>Previous Due: </b> <span style="margin-left:50px"><input id="last_name" type="text"
-                    class="validate" style="width: 70px"></span></p>
-
-        <hr>
-        <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">400 tk</span></p>
-
-        <p style="font-size:18px"><b>Paid: </b> <span style="margin-left:50px"><input id="last_name" type="text" class="validate"
+        <p style="font-size:18px"><b>Paid: </b> <span style="margin-left:50px"><input #paidAmount="ngModel" [(ngModel)]="client.paidAmount" name="paidAmount"  id="paidAmount" type="text" class="validate"
                     style="width: 70px"></span></p>
+                    <a (click)="calculateCurrentdue(client)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
         <hr>
-        <p style="font-size:18px"><b>Curent Due: </b> <span style="margin-left:50px"><input id="last_name" type="text"
+        <p style="font-size:18px"><b>Curent Due: </b> <span style="margin-left:50px"><input #currentDue="ngModel" [(ngModel)]="client.currentDue" name="currentDue"  id="currrentDue" type="text"
                     class="validate" style="width: 70px"></span></p>
 
         <div class="card-body ui-app__button-demo">
-            <a class="waves-effect waves-light btn btn-rounded " style="font-size:20px">PRINT</a>
+            <a (click)="saveReport(client,newBookList)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Save</a>
+            <a *ngIf="billNo" class="waves-effect waves-light btn btn-rounded " style="font-size:20px" [routerLink]="['/ReportDetails/',billNo]">Print</a>
         </div>
 
     </div>

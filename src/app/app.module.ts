@@ -27,7 +27,10 @@ import { ClientInputFormComponent } from './client-input-form/client-input-form.
 import { DisplayClientsInfoComponent } from './display-clients-info/display-clients-info.component';
 import { CategoryInputFormComponent } from './category-input-form/category-input-form.component';
 import { DisplayCategoryInfosComponent } from './display-category-infos/display-category-infos.component';
-import { BillingComponent } from './billing/billing.component'; 
+import { BillingComponent } from './billing/billing.component';
+import { AppReportComponent } from './app-report/app-report.component';
+import { AppDashboardComponent } from './app-dashboard/app-dashboard.component';
+import { SearchClientReportComponent } from './search-client-report/search-client-report.component'; 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,7 +49,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     DisplayClientsInfoComponent,
     CategoryInputFormComponent,
     DisplayCategoryInfosComponent,
-    BillingComponent
+    BillingComponent,
+    AppReportComponent,
+    AppDashboardComponent,
+    SearchClientReportComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +65,11 @@ export function HttpLoaderFactory(http: HttpClient) {
        component: HomeComponent ,
         
       },
+      {
+        path: 'dashboard',
+      component: AppDashboardComponent ,
+       
+       },
       {
         path: 'BookEntry',
       component: BookInfoComponent ,
@@ -104,7 +115,18 @@ export function HttpLoaderFactory(http: HttpClient) {
           path: 'billing',
         component: BillingComponent ,
          
+         },
+         {
+          path: 'ReportDetails/:billNo',
+        component: AppReportComponent ,
+         
+         },
+         {
+          path: 'SearchClientReport',
+          component: SearchClientReportComponent ,
+         
          }
+         
     ]),
     TranslateModule.forRoot({
       loader: {

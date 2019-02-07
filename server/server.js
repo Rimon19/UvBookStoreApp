@@ -9,6 +9,9 @@ const home = require('../routes/home');
 const bookInfo = require('../routes/bookInfo');
 const category = require('../routes/category');
 const client = require('../routes/client');
+const clientReport = require('../routes/clientReports');
+const bookReport = require('../routes/bookReport');
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,5 +27,7 @@ app.use('/', home);
 app.use('/api/books', bookInfo);
 app.use('/api/category', category);
 app.use('/api/client', client);
+app.use('/api/clientReport', clientReport);
+app.use('/api/bookReport',bookReport);
 const port=process.env.port||3000
 app.listen(port,()=>console.log(`listening on port ${port}`));

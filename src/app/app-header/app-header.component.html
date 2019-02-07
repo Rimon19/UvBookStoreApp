@@ -32,7 +32,7 @@
                   <form action="#">
                       <div class="input-field">
                           <!--Search input-->
-                          <input id="search" type="search" autocomplete="off" placeholder="Search pages here!">
+                          <input #query (keyup)="filter(query.value)"  id="search" type="search"  placeholder="Search pages here!">
                           <!--End Search input-->
                           <!--Search icon-->
                           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
@@ -117,7 +117,7 @@
       <ul class="no-margin">
           <!-- dashboard menu -->
           <li>
-              <a href="dashboard.html" class="waves-effect waves-light btn btn-rounded btn-dashboard"><i class="material-icons left">dashboard</i>Dashboard</a>
+              <a routerLink="/dashboard" class="waves-effect waves-light btn btn-rounded btn-dashboard"><i class="material-icons left">dashboard</i>Dashboard</a>
           </li>
           <!--end  dashboard menu -->
 
@@ -193,6 +193,10 @@
                 </li>
                 <li>
                     <a routerLink="/billing" class="collapsible-header"><i class="material-icons left">message</i>Billing</a>
+
+                </li>
+                <li>
+                    <a routerLink="/SearchClientReport" class="collapsible-header"><i class="material-icons left">message</i>Search Report</a>
 
                 </li>
 
