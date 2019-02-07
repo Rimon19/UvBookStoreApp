@@ -38,6 +38,7 @@
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "dependencies": {
+    "@types/jspdf": "^1.2.2",
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
@@ -46,8 +47,10 @@
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "helmet": "^3.15.0",
+    "html2canvas": "^1.0.0-alpha.12",
     "joi": "^14.3.1",
     "jshint": "^2.9.7",
+    "jspdf": "^1.5.3",
     "lib": "^3.0.2",
     "lion": "^1.0.1",
     "morgan": "^1.9.1",

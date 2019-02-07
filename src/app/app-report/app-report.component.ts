@@ -3,7 +3,10 @@ import { Client } from './../../../models/Angular/Client';
 import { BookReportService } from './../book-report.service';
 import { ClientReportService } from './../client-report.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef ,ViewChild } from '@angular/core';
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas'; 
+
 
 @Component({
   selector: 'app-app-report',
@@ -11,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-report.component.scss']
 })
 export class AppReportComponent implements OnInit {
+  @ViewChild('content') content:ElementRef;
   billNo;
   clientReports:Client[]=[];
   filteredClientReportBybillNo:Client[]=[];
@@ -64,4 +68,19 @@ export class AppReportComponent implements OnInit {
     });
   }
 
+  downloadPdf(){
+  let doc=new jsPDF();
+  let specialElementsHandalers={
+    '#editor':function(element,renderer){
+      return true;
+    }
+  };
+
+  let content=this.content.nativeElement;
+  doc.fromHTML(content.innerHTML,15,15,{
+  'width':190,
+  'elementHandlers':specialElementsHandalers
+  });
+  doc.save('report.pdf');
+  }
 }
