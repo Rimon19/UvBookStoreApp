@@ -4,21 +4,25 @@
 
     <form action="#" class="col s12" enctype="multipart/form-data">
         <div class="row">
+            
             <div class="input-field col s6">
-                <input type="text" class="validate">
-                <label for="first_name">Book ID: </label>
+                <input #name="ngModel" [(ngModel)]="book.name" placeholder="Book Name" name="name" id="name" type="text" class="validate">
+                
             </div>
+
             <div class="input-field col s6">
-                <input #name="ngModel" [(ngModel)]="book.name" name="name" id="name" type="text" class="validate">
-                <label for="last_name">Book Name</label>
+                
+                <input #basePrice="ngModel" placeholder="Base Price" [(ngModel)]="book.basePrice" name="basePrice" id="basePrice" type="text"
+                    class="validate">
+                
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
-                <input #basePrice="ngModel" [(ngModel)]="book.basePrice" name="basePrice" id="basePrice" type="text"
+                <input #publisher="ngModel" [(ngModel)]="book.publisher" placeholder="Publisher" name="publisher" id="publisher" type="text"
                     class="validate">
-                <label for="first_name">Base Price </label>
+               
             </div>
             <!-- <div class="input-field col s6">
               <input  placeholder="Placeholder" id="first_name" type="text" class="validate">
@@ -52,38 +56,23 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <input #publisher="ngModel" [(ngModel)]="book.publisher" name="publisher" id="publisher" type="text"
-                    class="validate">
-                <label for="publisher">Publisher </label>
+                <input #author="ngModel" [(ngModel)]="book.author" name="author" placeholder="Author" id="author" type="text" class="validate">
+                
             </div>
             <div class="input-field col s6">
-                <input #publicherYear="ngModel" [(ngModel)]="book.publicherYear" name="publicherYear" id="publicherYear"
+                <input #publicherYear="ngModel" [(ngModel)]="book.publicherYear" placeholder="Published Year" name="publicherYear" id="publicherYear"
                     type="text" class="validate">
-                <label for="publicherYear">Published Year </label>
+                
             </div>
         </div>
 
-        <div class="row">
-            <div class="input-field col s6">
-                <input #author="ngModel" [(ngModel)]="book.author" name="author" id="author" type="text" class="validate">
-                <label for="first_name">Author: </label>
-            </div>
-            <div class="input-field col s6">
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>Select Image</span>
-                        <input type="file" (change)="selectFile($event)">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        
 
         <div class="card-body ui-app__button-demo">
-            <a (click)="save(book)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+            <a *ngIf="!id" (click)="save(book)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+            <a *ngIf="id" (click)="update(book)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Update</a>
+            <a *ngIf="id" (click)="delete(id)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Delete</a>
+         
         </div>
 
     </form>

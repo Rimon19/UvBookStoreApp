@@ -1,6 +1,7 @@
 <div class="input-field col s12">
-  <i class="material-icons prefix">search Client</i>
-  <input #query (keyup)="filterReportByBillNO(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients">
+  
+  <input #query (keyup)="filterReportByBillNO(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients" style="padding-left:50px">
+  <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
 </div>
 <table>
   <tr *ngFor="let c of filteredBillNo">

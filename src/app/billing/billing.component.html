@@ -13,8 +13,9 @@
 
 <div class="row">
     <div class="input-field col s12">
-        <i class="material-icons prefix">search book</i>
-        <input #query (keyup)="filterBooks(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients">
+        
+        <input #query (keyup)="filterBooks(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Book" style="padding-left:50px">
+        <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
     </div>
     <table>
         <tr *ngFor="let book of filteredBooks">
@@ -23,8 +24,8 @@
         </tr>
     </table>
     <div class="input-field col s12">
-        <i class="material-icons prefix">search Client</i>
-        <input #query (keyup)="filterClients(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients">
+        <input #query (keyup)="filterClients(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients" style="padding-left:50px">
+        <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
     </div>
     <table>
         <tr *ngFor="let c of filteredClients">
@@ -37,23 +38,24 @@
 
 <div class="row">
     <div class="input-field col s6">
-        <input #name="ngModel" [(ngModel)]="client.name" name="name"  id="name" type="text" class="validate">
-        <label for="first_name">Client Name: </label>
+        <input #name="ngModel" [(ngModel)]="client.name" name="name"  id="name" type="text" placeholder="Client Name" class="validate">
+        
+
     </div>
     <div class="input-field col s6">
-        <input #address="ngModel" [(ngModel)]="client.address" name="address" id="address" type="text" class="validate">
-        <label for="last_name">Address: </label>
+        <input #address="ngModel" [(ngModel)]="client.address" name="address" id="address" type="text" placeholder="Client Address" class="validate">
+        
     </div>
 </div>
 
 <div class="row">
     <div class="input-field col s6">
-        <input #mobile="ngModel" [(ngModel)]="client.mobile" name="mobile" id="mobile" type="text" class="validate">
-        <label for="first_name">Phone: </label>
+        <input #mobile="ngModel" [(ngModel)]="client.mobile" placeholder="Phone:" name="mobile" id="mobile" type="text" class="validate">
+        
     </div>
     <div class="input-field col s6">
-        <input #ClientId="ngModel" [(ngModel)]="client.ClientId" name="ClientId" id="ClientId" type="text" class="validate">
-        <label for="last_name">ID: </label>
+        <input #ClientId="ngModel" [(ngModel)]="client.ClientId" placeholder="Client ID" name="ClientId" id="ClientId" type="text" class="validate">
+         
     </div>
 
 </div>

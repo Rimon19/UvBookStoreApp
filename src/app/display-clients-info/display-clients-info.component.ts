@@ -20,13 +20,6 @@ export class DisplayClientsInfoComponent implements OnInit {
 
   ngOnInit() {
   }
-  delete(id){
-   
-   
-    this.clientService.deleteClient(id).subscribe(data=>{
-      
-    })
-   
-  }
+  
 
 }

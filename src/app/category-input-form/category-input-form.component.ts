@@ -35,7 +35,7 @@ export class CategoryInputFormComponent implements OnInit {
    .subscribe(data=>{
    
       });
-      this.router.navigate(['/displayCategoryInfo']);
+      // this.router.navigate(['/displayCategoryInfo']);
 
   }
 
@@ -45,6 +45,15 @@ export class CategoryInputFormComponent implements OnInit {
     .subscribe(data=>{
      
     })
-    this.router.navigate(['/displayCategoryInfo']);
+    
+  }
+  
+  delete(id){
+   
+   
+    this.categoryServic.deleteCategory(id).subscribe(data=>{
+      
+    })
+   
   }
 }

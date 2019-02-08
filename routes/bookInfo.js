@@ -64,26 +64,27 @@ data=(req.body);
 
 });
 //put
-router.get('/edit',(req, res) => {
-	const id = req.params.id;
+router.put('/edit',(req, res) => {
+
+	data=(req.body);
 	db.BookInf.update( {
-		name: req.body.name,
-	  basePrice: req.body.basePrice,
-		categoryId: req.body.categoryId,
-		image: req.body.image,
-		publisher: req.body.publisher,
-		publicherYear: req.body.publicherYear,
-		author: req.body.author
+		name: data.name,
+	  basePrice: data.basePrice,
+		categoryId: data.categoryId,
+		image: data.image,
+		publisher: data.publisher,
+		publicherYear: data.publicherYear,
+		author: data.author
 		}, 
-					 { where: {id: req.params.id} }
+					 { where: {id: data.id} }
 				   ).then(() => {
-					 res.status(200).send("updated successfully a customer with id = " + id);
+					 res.status(200);
 				   });
 });
 
        
 //delete
-router.delete('/delete',exports.delete = (req, res) => {
+router.delete('/delete/:id',exports.delete = (req, res) => {
 	const id = req.params.id;
 	db.BookInf.destroy({
 	  where: { id: id }

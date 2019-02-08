@@ -52,4 +52,13 @@ export class ClientInputFormComponent implements OnInit {
    // this.router.navigate(['/displayCategoryInfo']);
   }
 
+  delete(id){
+   
+   
+    this.clientService.deleteClient(id).subscribe(data=>{
+      
+    })
+   
+  }
+
 }

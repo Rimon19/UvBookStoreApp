@@ -27,12 +27,5 @@ export class DisplayCategoryInfosComponent implements OnInit {
   ngOnInit() {
   }
 
-  delete(id){
-   
-   
-    this.categoryServic.deleteCategory(id).subscribe(data=>{
-      
-    })
-   
-  }
+
 }

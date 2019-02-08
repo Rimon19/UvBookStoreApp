@@ -25,11 +25,11 @@ export class BookInfoService {
   }
 
   updateBookInfo(bookInfo: BookInfo): Observable<void> {
-    return this.http.put<void>('http://localhost:3000/api/books/' + bookInfo.id, bookInfo);
+    return this.http.put<void>('http://localhost:3000/api/books/edit', bookInfo);
   }
 
   deleteBookInfo(id: string) {
-    return this.http.delete('http://localhost:3000/api/books/' + id);
+    return this.http.delete('http://localhost:3000/api/books/delete/' + id);
   }
 
 

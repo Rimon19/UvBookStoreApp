@@ -16,7 +16,7 @@
                               <th>Pubkisher</th>
                               <th>Author</th>
                               <th>Publish Year</th>
-                              <th>Image</th>
+                              <!-- <th>Image</th> -->
                           </tr>
                       </thead>
                       <tbody>
@@ -27,8 +27,9 @@
                               <td>{{book.publisher}}</td>
                               <td>{{book.author}}</td>
                               <td>{{book.publicherYear}}</td>
-                              <td><img src="data:image/png;base64,book.image" class="rounded-circle" width="45" height="45"></td>
-                              <!-- <td><img [src]=book.image></td> -->
+                              <!-- <td><img src="data:image/png;base64,book.image" class="rounded-circle" width="45" height="45"></td> -->
+                              <td><a [routerLink]="['/BookEntry/', book.id]">Edit</a></td>
+                              
                           </tr>
 
 

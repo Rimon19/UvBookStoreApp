@@ -9,32 +9,32 @@
                     <label for="first_name">Client ID: </label>
                 </div> -->
             <div class="input-field col s6">
-                <input #name="ngModel" [(ngModel)]="client.name" name="name" id="name" type="text" class="validate">
-                <label for="last_name">Client Name</label>
+                <input #name="ngModel" [(ngModel)]="client.name" placeholder="Client Name" name="name" id="name" type="text" class="validate">
+                
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
-                <input #address="ngModel" [(ngModel)]="client.address" name="address" id="address" type="text" class="validate">
-                <label for="first_name">Address </label>
+                <input #address="ngModel" [(ngModel)]="client.address" placeholder="Client Address" name="address" id="address" type="text" class="validate">
+                
             </div>
             <div class="input-field col s6">
-                <input #mobile="ngModel" [(ngModel)]="client.mobile" name="mobile" id="mobile" type="text" class="validate">
-                <label for="first_name">Mobile No </label>
+                <input #mobile="ngModel" [(ngModel)]="client.mobile" placeholder="Client Mobile" name="mobile" id="mobile" type="text" class="validate">
+                
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
-                <input #dueAmount="ngModel" [(ngModel)]="client.dueAmount" name="dueAmount" id="dueAmount" type="text"
+                <input #dueAmount="ngModel" [(ngModel)]="client.dueAmount" name="dueAmount" placeholder="Due Amount" id="dueAmount" type="text"
                     class="validate">
-                <label for="first_name">Due Amount </label>
+                
             </div>
             <div class="input-field col s6">
-                <input #advanceAmount="ngModel" [(ngModel)]="client.advanceAmount" name="advanceAmount" id="advanceAmount"
+                <input #advanceAmount="ngModel" [(ngModel)]="client.advanceAmount" name="advanceAmount" placeholder="Advance Amount" id="advanceAmount"
                     id="first_name" type="text" class="validate">
-                <label for="first_name">Advance Amount</label>
+                
             </div>
         </div>
 
@@ -43,6 +43,8 @@
         <div class="card-body ui-app__button-demo">
             <a *ngIf="!id" (click)="save(client)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
             <a *ngIf="id" (click)="update(client)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Update</a>
+            <a *ngIf="id" (click)="delete(id)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Delete</a>
+            
         </div>
 
     </form>

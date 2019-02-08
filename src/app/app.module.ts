@@ -76,6 +76,11 @@ export function HttpLoaderFactory(http: HttpClient) {
        
      },
      {
+      path: 'BookEntry/:id',
+    component: BookInfoComponent ,
+     
+   },
+     {
       path: 'displayBooksInfo',
     component: DisplayBooksInfoComponent ,
      
