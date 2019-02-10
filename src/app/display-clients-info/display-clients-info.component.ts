@@ -10,15 +10,16 @@ export class DisplayClientsInfoComponent implements OnInit {
   clients=[];
   constructor(private clientService:ClientService) {
 
-    clientService.getAllClient()
+    
+   }
+
+  ngOnInit() {
+    this.clientService.getAllClient()
     .subscribe(res => {
       this.clients = res;
      
     }, err => {
     });
-   }
-
-  ngOnInit() {
   }
   
 

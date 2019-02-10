@@ -1,13 +1,35 @@
-<div class="input-field col s12">
+
+  
+<!-- <div class="input-field col s12">
+
   
   <input #query (keyup)="filterReportByBillNO(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients" style="padding-left:50px">
   <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
-</div>
-<table>
+</div> -->
+<!-- <table>
   <tr *ngFor="let c of filteredBillNo">
     <td>{{c.name}}</td>
      <td>{{c.billNo}}</td>
      <td> <a  class="waves-effect waves-light btn btn-rounded "  
       style="font-size:20px" [routerLink]="['/ReportDetails/',c.billNo]">Search</a></td>
   </tr>
-</table>
+</table> -->
+
+<form class="example-form">
+    <input #query (keyup)="filterReportByBillNO(query.value)"
+     type="text" id="autocomplete-input-country" 
+     placeholder="Search Bill No" 
+     style="padding-left:50px"
+     matInput [matAutocomplete]="auto">
+    <label class="label-icon" for="search">
+      <i class="material-icons" style="margin-top:13px;">search</i>
+    </label>
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let c of filteredBillNo" [value]="c.billNo">
+            {{c.billNo}}
+            <a  class="waves-effect waves-light btn btn-rounded "  
+            style="font-size:20px" [routerLink]="['/ReportDetails/',c.billNo]">select</a>
+        </mat-option>
+      </mat-autocomplete>
+
+  </form>

@@ -1,4 +1,69 @@
 <div class="row">
+    <p>
+      <input 
+        #nameSearch
+        (keyup)="filter(nameSearch.value)"
+        type="text" class="form-control" placeholder="Search Book by Name">
+    </p>
+    
+    <data-table
+      [items]="items"
+      [itemCount]="itemCount"
+      (reload)="reloadItems($event)">
+    
+      <data-table-column
+        [property]="'name'"  
+        [header]="'name'"
+        [sortable]="true"
+        [resizable]="true"
+      ></data-table-column>
+      
+      <data-table-column 
+       [property]="'publisher'" 
+       [header]="'publisher'"
+       [sortable]="true" 
+       [resizable]="true">
+        </data-table-column>
+    
+      <data-table-column 
+      [property]="'publicherYear'" 
+      [header]="'publicherYear'"
+      [sortable]="true" 
+      [resizable]="true">
+    </data-table-column>
+    
+    <data-table-column 
+      [property]="'author'" 
+      [header]="'author'"
+      [sortable]="true" 
+      [resizable]="true">
+    </data-table-column>
+    
+    <data-table-column 
+      [property]="'basePrice'" 
+      [header]="'basePrice'"
+      [sortable]="true" 
+      [resizable]="true">
+    </data-table-column>
+
+      <data-table-column
+        [property]="'$key'"  
+        [header]="'Action'"
+      >
+        <ng-template #dataTableCell *ngFor="let book of books">
+          <a  [routerLink]="['/BookEntry/', book.id]">Edit</a>
+   
+        </ng-template>
+      </data-table-column>
+    
+    </data-table>
+    
+  </div>
+
+
+
+
+<!-- <div class="row">
 
   <div class="col s12">
       <div class="card ui-app__page-content">
@@ -16,7 +81,7 @@
                               <th>Pubkisher</th>
                               <th>Author</th>
                               <th>Publish Year</th>
-                              <!-- <th>Image</th> -->
+                              
                           </tr>
                       </thead>
                       <tbody>
@@ -27,7 +92,7 @@
                               <td>{{book.publisher}}</td>
                               <td>{{book.author}}</td>
                               <td>{{book.publicherYear}}</td>
-                              <!-- <td><img src="data:image/png;base64,book.image" class="rounded-circle" width="45" height="45"></td> -->
+                             
                               <td><a [routerLink]="['/BookEntry/', book.id]">Edit</a></td>
                               
                           </tr>
@@ -50,4 +115,4 @@
 </div>
 
 
-
+ -->

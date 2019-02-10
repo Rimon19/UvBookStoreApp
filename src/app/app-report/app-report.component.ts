@@ -77,8 +77,9 @@ export class AppReportComponent implements OnInit {
   };
 
   let content=this.content.nativeElement;
-  doc.fromHTML(content.innerHTML,15,15,{
-  'width':190,
+  doc.fromHTML(content,15,15,{
+  'width':150,
+ 
   'elementHandlers':specialElementsHandalers
   });
   doc.save('report.pdf');

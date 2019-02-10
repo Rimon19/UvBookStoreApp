@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClientService } from './../client.service';
 import { Client } from './../../../models/Angular/Client';
 import { Component, OnInit } from '@angular/core';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-client-input-form',
@@ -12,8 +13,11 @@ export class ClientInputFormComponent implements OnInit {
  client=new Client();
  clients=[];
  id;
+ Message='';
+  action='';
   constructor(private clientService:ClientService,
-    private route:ActivatedRoute) {
+    private route:ActivatedRoute,
+    private snackBar: MatSnackBar) {
  
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id!=null){
@@ -33,13 +37,19 @@ export class ClientInputFormComponent implements OnInit {
     .subscribe(res => {
       this.clients = res;
       client.ClientId="clnt0"+(this.clients.length+1);
+      this.clientService.insertClient(client).subscribe(data=>{
+    
+      });
+      this.Message='Successfullay Saved !';
+      this.snackBar.open(this.Message, this.action, {
+      duration: 2000,
+    });
+  
+    this.Message='';      
     }, err => {
     });
     
-   this.clientService.insertClient(client).subscribe(data=>{
-    
-})
-
+ 
 
   }
 
@@ -47,8 +57,14 @@ export class ClientInputFormComponent implements OnInit {
    
     this.clientService.updateClient(Client)
     .subscribe(data=>{
-     
-    })
+     this.client=null;
+    });
+    this.Message='Successfullay Updated !';
+    this.snackBar.open(this.Message, this.action, {
+    duration: 2000,
+  });
+
+  this.Message='';
    // this.router.navigate(['/displayCategoryInfo']);
   }
 
@@ -57,7 +73,13 @@ export class ClientInputFormComponent implements OnInit {
    
     this.clientService.deleteClient(id).subscribe(data=>{
       
-    })
+    });
+    this.Message='Successfullay Deleted !';
+    this.snackBar.open(this.Message, this.action, {
+    duration: 2000,
+  });
+
+  this.Message='';
    
   }
 

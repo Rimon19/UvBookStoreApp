@@ -1,4 +1,6 @@
-<!-- Page content -->
+
+
+    <!-- Page content -->
 <div class="row">
 
     <!-- Bill Header -->
@@ -14,25 +16,37 @@
 <div class="row">
     <div class="input-field col s12">
         
-        <input #query (keyup)="filterBooks(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Book" style="padding-left:50px">
+        <input #bookSearch
+         (keyup)="filterBooks(bookSearch.value)" 
+         type="text" id="autocomplete-input-country"
+          placeholder="Search Book"
+           style="padding-left:50px"
+           matInput [matAutocomplete]="book">
         <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
+        <mat-autocomplete #book="matAutocomplete">
+            <mat-option *ngFor="let c of filteredBooks">
+                {{c.name}}
+                <a  class="waves-effect waves-light btn btn-rounded "  
+                style="font-size:20px" (click)="addList(c)">add</a>
+            </mat-option>
+          </mat-autocomplete>
     </div>
-    <table>
-        <tr *ngFor="let book of filteredBooks">
-           <td>{{book.name}}</td>
-           <td><button (click)="addList(book)">add list</button></td>
-        </tr>
-    </table>
+   
     <div class="input-field col s12">
-        <input #query (keyup)="filterClients(query.value)" type="text" id="autocomplete-input-country" placeholder="Search Clients" style="padding-left:50px">
+        <input #clientSearch
+         (keyup)="filterClients(clientSearch.value)"
+          type="text" id="autocomplete-input-client" 
+          placeholder="Search Clients" style="padding-left:50px"
+          matInput [matAutocomplete]="client">
         <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
     </div>
-    <table>
-        <tr *ngFor="let c of filteredClients">
-           <td>{{c.name}}</td>
-           <td><button (click)="selectClient(c.id)">select client</button></td>
-        </tr>
-    </table>
+    <mat-autocomplete #client="matAutocomplete">
+        <mat-option *ngFor="let c of filteredClients" [value]="c.name">
+            {{c.name}}
+            <a  class="waves-effect waves-light btn btn-rounded "  
+            style="font-size:20px" (click)="selectClient(c.id)">select</a>
+        </mat-option>
+      </mat-autocomplete>
 
 </div>
 

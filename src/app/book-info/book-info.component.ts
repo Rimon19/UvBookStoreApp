@@ -4,6 +4,7 @@ import { CategoryService } from './../category.service';
 import { BookInfo } from './../../../models/Angular/BookInfo';
 import { BookInfoService } from './../book-info.service';
 import { Component, OnInit } from '@angular/core';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-book-info',
@@ -18,9 +19,12 @@ export class BookInfoComponent implements OnInit {
   selectedFiles: FileList;
   currentFileUpload: File;
   id;
+  Message='';
+  action='';
   constructor(private bookInfoService:BookInfoService,
     private categoryService:CategoryService,
-    private route:ActivatedRoute) {
+    private route:ActivatedRoute,
+    private snackBar: MatSnackBar) {
      
       this.id = this.route.snapshot.paramMap.get('id');
       if(this.id!=null){
@@ -28,7 +32,9 @@ export class BookInfoComponent implements OnInit {
         .subscribe(data=>{
           this.book=data;
         });
+        console.log('cons',this.id);
       }
+      
   
 
      }
@@ -51,17 +57,31 @@ export class BookInfoComponent implements OnInit {
     // objBook.image=this.currentFileUpload;
     this.bookInfoService.insertBookInfo(objBook)
     .subscribe(data=>{
+    
 
     });
 
+    this.Message='Successfullay Saved !';
+    this.snackBar.open(this.Message, this.action, {
+    duration: 2000,
+  });
+
+  this.Message='';
   }
 
   update(book){
    
     this.bookInfoService.updateBookInfo(book)
-    .subscribe(data=>{
-     
-    })
+    .subscribe(data=>{});
+    
+    this.Message='Successfullay Updated !';
+    this.snackBar.open(this.Message, this.action, {
+    duration: 2000,
+  });
+  this.Message='';
+
+ 
+ 
     
   }
   delete(id){
@@ -69,7 +89,13 @@ export class BookInfoComponent implements OnInit {
    
     this.bookInfoService.deleteBookInfo(id).subscribe(data=>{
       
-    })
+    });
+    this.Message='Successfullay Deleted !';
+    this.snackBar.open(this.Message, this.action, {
+    duration: 2000,
+  });
+  this.Message='';
+ 
    
   }
 }

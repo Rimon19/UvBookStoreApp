@@ -31,8 +31,8 @@ export class BillingComponent implements OnInit {
     private bookInfoService:BookInfoService,
     private bookReportService:BookReportService,
     private clientReportService:ClientReportService,
-    private router:Router,) { 
-     console.log('fromConstructor:',this.newBookList);
+    private router:Router) { 
+    
     }
 
   ngOnInit() {
@@ -46,27 +46,23 @@ export class BillingComponent implements OnInit {
     this.clientService.getAllClient()
     .subscribe(res => {
       this.clients = res; 
-      console.log(this.clients);
+     
     }, err => {
-      console.log(err);
+    
     });
   }
 
   addList(book){
-  console.log(book);
+
   this.newBookList.push(book);
-  console.log(this.newBookList);
+  
 
   }
 
   updateBookList(book){
   
-    this.newBookList.map((todo, i) => {
-      console.log('book.discount:',book.discount)
+    this.newBookList.map((todo, i) => {    
       if (todo.id == book.id){
-        console.log('listid:',todo.id);
-        console.log('updatedId:',book.id);
-        console.log('shouldBeUpdated-discount:',this.newBookList[i].discount)
          this.newBookList[i].discount=book.discount;
 
          const sTotal=(this.newBookList[i].basePrice*book.discount);
@@ -75,67 +71,55 @@ export class BillingComponent implements OnInit {
          this.newBookList[i].subTotal=this.newBookList[i].basePrice-dDiscount;
        }
       
-      //  this.newBookList.forEach(element => {
-      //   console.log(element);
-      //   console.log('elementSubtotal:',element.subTotal) ;
-      //   this.total+=element.subTotal;
- 
-      //  });
-      //  console.log('total:',this.total);
+     
      });
-    //  console.log('outsideMap:',this.newBookList);
-    //  for (let i = 0; i < this.newBookList.length; i++) {
-    //     this.total = this.newBookList[i].subTotal;
-    //     console.log('UnderLooptotal:',this.total);
-    //  }
+    
      this.total = this.newBookList.filter((item) =>item.subTotal)
                             .map((item) => +item.subTotal)
                             .reduce((sum, current) => sum + current);
-        console.log('total:',this.total);
+        
   }
 
   filterClients(query: string) { 
        
-      console.log(query); 
+     
       let filterClents = (query) ?
         this.clients.filter(p => p.name
         .toLowerCase()
         .includes(query.toLowerCase())) :
          this.clients;      
          this.filteredClients=filterClents;
-         console.log('filterClients:',this.filteredClients);          
+                
    
    }
  selectClient(clientId){
   if (clientId) this.clientService.getClient(clientId)
   .subscribe(p => this.client = p);
-  console.log('selectedClient',this.client);    
+
 }
 
    filterBooks(query: string) { 
-      console.log(query);
+      
       let filteredBooks = (query) ?
         this.books.filter(p => p.name
         .toLowerCase()
         .includes(query.toLowerCase())) :
          this.books;      
          this.filteredBooks=filteredBooks;
-         console.log('filteredBooks:',this.filteredBooks);          
+                
    }
 
    calculationWithPackinCoastAndCommision(clientInfo){
     this.client=clientInfo;
-    console.log('total',this.total);
-
+    
    const packhingCost=this.client.packingCoast;
    const total=this.total;
 
-    this.client.total=(total+packhingCost);
-    console.log('packing Cost',this.client.packingCoast);
-    console.log('totalwithPacking',this.client.total);
+    this.client.total=( +total + +packhingCost);
+  
     this.client.totalWithComiAndPackingCost=(this.client.total-this.client.commision);
-    console.log('commision',this.client.commision);
-    console.log('totalAfterdeductedCommision',this.client.totalWithComiAndPackingCost);
+  
+    
    }
    calculationWitPreviousDue(clientInfo){
     this.client=clientInfo;
@@ -147,7 +131,7 @@ export class BillingComponent implements OnInit {
       this.client.currentDue=(this.client.totalWithPreviousDue-this.client.paidAmount);
     }
     else{
-      this.client.currentDue=(this.client.totalWithPreviousDue+this.client.paidAmount);
+      this.client.currentDue=( +this.client.totalWithPreviousDue + +this.client.paidAmount);
     }
    
   
@@ -156,24 +140,21 @@ export class BillingComponent implements OnInit {
 
    saveReport(client,newBookList){
 
-    console.log('client',client);
-    console.log('new book list',newBookList);
+  
     this.clientReportService.getAllClientReport()
     .subscribe(data=>{
-     console.log('all Client reports',data);
      this.clientReports=data;
       
 
      client.billNo='bill-00'+this.clientReports.length;
-     console.log('lenth',this.clientReports.length);
      this.clientReportService.insertClientReport(client).subscribe(data=>{
-       console.log('inserted data',data)
+       
      })
 
      newBookList.forEach(element => {
        element.billNo='bill-00'+this.clientReports.length;
        this.bookReportService.insertBookReport(element).subscribe(data=>{
-         console.log('inserted Book result',data)
+         
        })
      });
     

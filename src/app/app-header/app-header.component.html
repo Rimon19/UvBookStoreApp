@@ -32,12 +32,24 @@
                 <form action="#" style="height:45px">
                     <div class="input-field">
                         <!--Search input-->
-                        <input #query (keyup)="filter(query.value)" id="search" type="search" placeholder="Search pages here!">
+                        <input #mainSearch
+                         (keyup)="filter(mainSearch.value)"
+                         id="search" type="search" 
+                         placeholder="Search Book"
+                         matInput
+                        [matAutocomplete]="mainSearch">
                         <!--End Search input-->
                         <!--Search icon-->
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <label class="label-icon" for="search">
+                        <i class="material-icons">search</i></label>
                         <!--End Search icon-->
 
+                        <mat-autocomplete #mainSearch="matAutocomplete">
+                                <mat-option *ngFor="let c of filteredBooks" [value]="c.name">
+                                    {{c.name}}  {{c.basePrice}} tk
+                                  
+                               </mat-option>
+                         </mat-autocomplete>
 
 
                     </div>

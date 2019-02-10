@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-
+import { DataTableModule } from 'angular5-data-table';
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -31,6 +31,10 @@ import { BillingComponent } from './billing/billing.component';
 import { AppReportComponent } from './app-report/app-report.component';
 import { AppDashboardComponent } from './app-dashboard/app-dashboard.component';
 import { SearchClientReportComponent } from './search-client-report/search-client-report.component'; 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
+   
     AppComponent,
     HomeComponent,
     WebviewDirective,
@@ -52,9 +57,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     BillingComponent,
     AppReportComponent,
     AppDashboardComponent,
-    SearchClientReportComponent
+    SearchClientReportComponent,
+    BookDetailsComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatSnackBarModule,
+    DataTableModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -80,6 +90,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     component: BookInfoComponent ,
      
    },
+   {
+    path: 'bookDetails/:id',
+  component: BookDetailsComponent ,
+   
+ },
      {
       path: 'displayBooksInfo',
     component: DisplayBooksInfoComponent ,
