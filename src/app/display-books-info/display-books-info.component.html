@@ -1,11 +1,25 @@
+<p>
+  <input 
+    #nameSearch
+    (keyup)="filterByName(nameSearch.value)"
+    type="text" class="form-control" placeholder="Search Book by Name">
+</p>
+<p>
+<label for="id">Search by Category</label>
+<select #id="ngModel" [(ngModel)]="category.id" name="id" id="id" (change)="filterbyCategory(category.id)" class="browser-default">
+    <option value="">select</option>
+    <option *ngFor="let c of categories" [value]="c.id">
+        {{ c.categoryName }}
+    </option>
+</select>
+</p>
 <div class="row">
-    <p>
-      <input 
-        #nameSearch
-        (keyup)="filter(nameSearch.value)"
-        type="text" class="form-control" placeholder="Search Book by Name">
-    </p>
     
+   
+   
+
+    
+
     <data-table
       [items]="items"
       [itemCount]="itemCount"
@@ -13,35 +27,42 @@
     
       <data-table-column
         [property]="'name'"  
-        [header]="'name'"
+        [header]="'Name'"
         [sortable]="true"
         [resizable]="true"
       ></data-table-column>
       
+      <data-table-column
+      [property]="'categoryName'"  
+      [header]="'Category'"
+      [sortable]="true"
+      [resizable]="true"
+    ></data-table-column>
+
       <data-table-column 
        [property]="'publisher'" 
-       [header]="'publisher'"
+       [header]="'Publisher'"
        [sortable]="true" 
        [resizable]="true">
         </data-table-column>
     
       <data-table-column 
       [property]="'publicherYear'" 
-      [header]="'publicherYear'"
+      [header]="'PublicherYear'"
       [sortable]="true" 
       [resizable]="true">
     </data-table-column>
     
     <data-table-column 
       [property]="'author'" 
-      [header]="'author'"
+      [header]="'Author'"
       [sortable]="true" 
       [resizable]="true">
     </data-table-column>
     
     <data-table-column 
       [property]="'basePrice'" 
-      [header]="'basePrice'"
+      [header]="'Price'"
       [sortable]="true" 
       [resizable]="true">
     </data-table-column>
@@ -50,11 +71,12 @@
         [property]="'$key'"  
         [header]="'Action'"
       >
-        <ng-template #dataTableCell *ngFor="let book of books">
-          <a  [routerLink]="['/BookEntry/', book.id]">Edit</a>
+        <ng-template #dataTableCell let-item="item">
+          <a  [routerLink]="['/BookEntry/', item.id]">Edit</a>
    
         </ng-template>
       </data-table-column>
+
     
     </data-table>
     

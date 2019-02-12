@@ -37,14 +37,14 @@
                          id="search" type="search" 
                          placeholder="Search Book"
                          matInput
-                        [matAutocomplete]="mainSearch">
+                        [matAutocomplete]="autoSearch">
                         <!--End Search input-->
                         <!--Search icon-->
                         <label class="label-icon" for="search">
                         <i class="material-icons">search</i></label>
                         <!--End Search icon-->
 
-                        <mat-autocomplete #mainSearch="matAutocomplete">
+                        <mat-autocomplete #autoSearch="matAutocomplete">
                                 <mat-option *ngFor="let c of filteredBooks" [value]="c.name">
                                     {{c.name}}  {{c.basePrice}} tk
                                   

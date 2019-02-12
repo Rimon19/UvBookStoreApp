@@ -17,7 +17,8 @@ export class ClientInputFormComponent implements OnInit {
   action='';
   constructor(private clientService:ClientService,
     private route:ActivatedRoute,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar
+    ) {
  
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id!=null){
@@ -37,6 +38,7 @@ export class ClientInputFormComponent implements OnInit {
     .subscribe(res => {
       this.clients = res;
       client.ClientId="clnt0"+(this.clients.length+1);
+      
       this.clientService.insertClient(client).subscribe(data=>{
     
       });
@@ -45,7 +47,12 @@ export class ClientInputFormComponent implements OnInit {
       duration: 2000,
     });
   
-    this.Message='';      
+    this.Message='';  
+       this.client.name=null;
+       this.client.address=null;
+       this.client.mobile=null;
+       this.client.dueAmount=null;
+       this.client.advanceAmount=null;
     }, err => {
     });
     
@@ -79,7 +86,8 @@ export class ClientInputFormComponent implements OnInit {
     duration: 2000,
   });
 
-  this.Message='';
+ this.Message='';
+ 
    
   }
 

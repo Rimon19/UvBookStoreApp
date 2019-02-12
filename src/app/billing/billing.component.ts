@@ -16,7 +16,8 @@ import { Router } from '@angular/router';
 })
 export class BillingComponent implements OnInit {
   clients:Client[]=[];
-  client=new Client();
+  
+  clnt=new Client();
   filteredClients:Client[]=[];
 
   books:BookInfo[]=[];
@@ -26,6 +27,7 @@ export class BillingComponent implements OnInit {
   total:number;
   clientReports:Client[]=[];
   billNo;
+  reportLenth:number;
 
   constructor(private clientService:ClientService,
     private bookInfoService:BookInfoService,
@@ -39,6 +41,7 @@ export class BillingComponent implements OnInit {
     this.bookInfoService.getAllBookInfo()
     .subscribe(res => {
       this.books = res; 
+      console.log('ng oninitBooks',this.books);
     }, err => {
       console.log(err);
     });
@@ -80,87 +83,122 @@ export class BillingComponent implements OnInit {
         
   }
 
-  filterClients(query: string) { 
+  filterClients(clientSearch: string) { 
        
-     
-      let filterClents = (query) ?
+  
+      let filterClents = (clientSearch) ?
         this.clients.filter(p => p.name
         .toLowerCase()
-        .includes(query.toLowerCase())) :
+        .includes(clientSearch.toLowerCase())) :
          this.clients;      
-         this.filteredClients=filterClents;
-                
+         this.filteredClients=filterClents;        
    
    }
  selectClient(clientId){
-  if (clientId) this.clientService.getClient(clientId)
-  .subscribe(p => this.client = p);
+  console.log(clientId);
+  let filterClents = (clientId) ?
+  this.clients.filter(p => p.id==clientId) :
+   this.clients;      
+   this.filteredClients=filterClents;  
+   this.filteredClients .forEach(element => {
+     this.clnt=element;
+     
+   });
+
+   
+  //  if (clientId) this.clientService.getClient(clientId)
+  // .subscribe(p => {
+  //   this.client= p;
+  //   console.log(this.client);
+  // });
 
 }
 
-   filterBooks(query: string) { 
-      
-      let filteredBooks = (query) ?
-        this.books.filter(p => p.name
-        .toLowerCase()
-        .includes(query.toLowerCase())) :
-         this.books;      
-         this.filteredBooks=filteredBooks;
+   filterBooks(bookSearch: string) { 
+     console.log(bookSearch);
+     console.log(this.books);
+    if (bookSearch && bookSearch.length) {
+   
+      let filteredBooks = (bookSearch) ?
+      this.books.filter(p => p.name.toLowerCase()      
+      .includes(bookSearch.toLowerCase())) :
+       this.books;      
+       this.filteredBooks=filteredBooks;
+       console.log(this.filteredBooks);
+       
+    } else {
+       
+    }
+
+   
+
+         
                 
    }
 
    calculationWithPackinCoastAndCommision(clientInfo){
-    this.client=clientInfo;
-    
-   const packhingCost=this.client.packingCoast;
+     console.log(clientInfo);
+    this.clnt=clientInfo;
+
+    console.log(this.clnt);
+   const packhingCost=this.clnt.packingCoast;
    const total=this.total;
 
-    this.client.total=( +total + +packhingCost);
+    this.clnt.total=( +total + +packhingCost);
   
-    this.client.totalWithComiAndPackingCost=(this.client.total-this.client.commision);
+    this.clnt.totalWithComiAndPackingCost=(this.clnt.total-this.clnt.commision);
   
     
    }
    calculationWitPreviousDue(clientInfo){
-    this.client=clientInfo;
-    this.client.totalWithPreviousDue=(this.client.totalWithComiAndPackingCost+this.client.dueAmount);
+    this.clnt=clientInfo;
+    this.clnt.totalWithPreviousDue=(+this.clnt.totalWithComiAndPackingCost + +this.clnt.dueAmount);
    }
    calculateCurrentdue(client){
-    this.client=client;
-    if(this.client.totalWithPreviousDue>0){
-      this.client.currentDue=(this.client.totalWithPreviousDue-this.client.paidAmount);
+    this.clnt=client;
+    if(this.clnt.totalWithPreviousDue>0){
+      this.clnt.currentDue=(this.clnt.totalWithPreviousDue-this.clnt.paidAmount);
     }
     else{
-      this.client.currentDue=( +this.client.totalWithPreviousDue + +this.client.paidAmount);
+      this.clnt.currentDue=( +this.clnt.totalWithPreviousDue + +this.clnt.paidAmount);
     }
    
   
    }
 
-
+   clearBook(newBookList){
+    this.newBookList=[];
+   }
    saveReport(client,newBookList){
 
-  
+  console.log(client);
+  this.clnt=client;
+  console.log('client info', this.clnt);
     this.clientReportService.getAllClientReport()
     .subscribe(data=>{
      this.clientReports=data;
-      
+     
 
-     client.billNo='bill-00'+this.clientReports.length;
-     this.clientReportService.insertClientReport(client).subscribe(data=>{
-       
-     })
 
      newBookList.forEach(element => {
-       element.billNo='bill-00'+this.clientReports.length;
-       this.bookReportService.insertBookReport(element).subscribe(data=>{
-         
-       })
-     });
-    
-    this.billNo=client.billNo;
+      element.billNo='bill-00'+this.clientReports.length;
+      this.bookReportService.insertBookReport(element).subscribe(data=>{
+        
+      })
+    });
 
-    }) 
+    this.clnt.billNo='bill-00'+this.clientReports.length;
+    this.clientReportService.insertClientReport(this.clnt).subscribe(data=>{
+      
+    })
+
+   this.billNo=this.clnt.billNo;
+
+    });
+   
+
+    
+
    
   
   }

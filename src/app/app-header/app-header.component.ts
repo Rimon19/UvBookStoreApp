@@ -16,25 +16,23 @@ filteredBooks:BookInfo[]=[];
    }
 
   ngOnInit() {
-  }
-
-  filter(query: string) { 
-  
     this.bookInfoService.getAllBookInfo()
     .subscribe(res => {
       this.books = res; 
-      
-      console.log(query);
-      let filteredBooks = (query) ?
-        this.books.filter(p => p.name
-        .toLowerCase()
-        .includes(query.toLowerCase())) :
-         this.books;      
-         this.filteredBooks=filteredBooks;
-         console.log('filteredBooks:',this.filteredBooks);          
+                  
     }, err => {
       console.log(err);
     });
-  
+  }
+
+  filter(mainSearch: string) { 
+    console.log(mainSearch);
+    let filteredBooks = (mainSearch) ?
+    this.books.filter(p => p.name
+    .toLowerCase()
+    .includes(mainSearch.toLowerCase())) :
+     this.books;      
+     this.filteredBooks=filteredBooks;
+     console.log('app-Header book Search:',this.filteredBooks);   
    }
 }

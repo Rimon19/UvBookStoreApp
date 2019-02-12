@@ -1,7 +1,7 @@
 
 
     <!-- Page content -->
-<div class="row">
+<div class="row" >
 
     <!-- Bill Header -->
     <div style="text-align:center">
@@ -14,16 +14,16 @@
 </div>
 
 <div class="row">
-    <div class="input-field col s12">
+    <div class="input-field col s6">
         
         <input #bookSearch
          (keyup)="filterBooks(bookSearch.value)" 
-         type="text" id="autocomplete-input-country"
+         type="text" id="autocomplete-input-book"
           placeholder="Search Book"
            style="padding-left:50px"
-           matInput [matAutocomplete]="book">
-        <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
-        <mat-autocomplete #book="matAutocomplete">
+           matInput [matAutocomplete]="billBooks">
+        <label class="label-icon" for="autocomplete-input-book"><i class="material-icons" style="margin-top:13px;">search</i></label>
+        <mat-autocomplete #billBooks="matAutocomplete">
             <mat-option *ngFor="let c of filteredBooks">
                 {{c.name}}
                 <a  class="waves-effect waves-light btn btn-rounded "  
@@ -32,7 +32,7 @@
           </mat-autocomplete>
     </div>
    
-    <div class="input-field col s12">
+    <div class="input-field col s6">
         <input #clientSearch
          (keyup)="filterClients(clientSearch.value)"
           type="text" id="autocomplete-input-client" 
@@ -41,7 +41,7 @@
         <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
     </div>
     <mat-autocomplete #client="matAutocomplete">
-        <mat-option *ngFor="let c of filteredClients" [value]="c.name">
+        <mat-option *ngFor="let c of filteredClients">
             {{c.name}}
             <a  class="waves-effect waves-light btn btn-rounded "  
             style="font-size:20px" (click)="selectClient(c.id)">select</a>
@@ -52,23 +52,23 @@
 
 <div class="row">
     <div class="input-field col s6">
-        <input #name="ngModel" [(ngModel)]="client.name" name="name"  id="name" type="text" placeholder="Client Name" class="validate">
+            <input #name="ngModel" [(ngModel)]="clnt.name" placeholder="Client Name" name="name" id="name" type="text" class="validate">
         
 
     </div>
     <div class="input-field col s6">
-        <input #address="ngModel" [(ngModel)]="client.address" name="address" id="address" type="text" placeholder="Client Address" class="validate">
+            <input #address="ngModel" [(ngModel)]="clnt.address" placeholder="Client Address" name="address" id="address" type="text" class="validate">
         
     </div>
 </div>
 
 <div class="row">
     <div class="input-field col s6">
-        <input #mobile="ngModel" [(ngModel)]="client.mobile" placeholder="Phone:" name="mobile" id="mobile" type="text" class="validate">
+            <input #mobile="ngModel" [(ngModel)]="clnt.mobile" placeholder="Client Mobile" name="mobile" id="mobile" type="text" class="validate">
         
     </div>
     <div class="input-field col s6">
-        <input #ClientId="ngModel" [(ngModel)]="client.ClientId" placeholder="Client ID" name="ClientId" id="ClientId" type="text" class="validate">
+        <input #ClientId="ngModel" [(ngModel)]="clnt.ClientId" placeholder="Client ID" name="ClientId" id="ClientId" type="text" class="validate">
          
     </div>
 
@@ -138,29 +138,30 @@
     <div class="col s3">
         <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{total}} tk</span></p>
 
-        <p style="font-size:18px"><b>Packing: </b> <span style="margin-left:50px"><input #packingCoast="ngModel" [(ngModel)]="client.packingCoast" name="packingCoast" id="packingCoast" type="text"
+        <p style="font-size:18px"><b>Packing: </b> <span style="margin-left:50px"><input #packingCoast="ngModel" [(ngModel)]="clnt.packingCoast" name="packingCoast" id="packingCoast" type="text"
                     class="validate" style="width: 70px"></span></p>
-        <p style="font-size:18px"><b>Commision: </b> <span style="margin-left:50px"><input #commision="ngModel" [(ngModel)]="client.commision" name="commision"  id="commision" type="text"
+        <p style="font-size:18px"><b>Commision: </b> <span style="margin-left:50px"><input #commision="ngModel" [(ngModel)]="clnt.commision" name="commision"  id="commision" type="text"
                     class="validate" style="width: 70px"></span></p>
-                    <a (click)="calculationWithPackinCoastAndCommision(client)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
+                    <a (click)="calculationWithPackinCoastAndCommision(clnt)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
                     <hr>
-                    <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.totalWithComiAndPackingCost}} tk</span></p>
+                    <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{clnt.totalWithComiAndPackingCost}} tk</span></p>
 
-        <p style="font-size:18px"><b>Previous Due: </b> <span style="margin-left:50px"><input #dueAmount="ngModel" [(ngModel)]="client.dueAmount" name="dueAmount" id="dueAmount" type="text"
+        <p style="font-size:18px"><b>Previous Due: </b> <span style="margin-left:50px"><input #dueAmount="ngModel" [(ngModel)]="clnt.dueAmount" name="dueAmount" id="dueAmount" type="text"
                     class="validate" style="width: 70px"></span></p>
-                    <a (click)="calculationWitPreviousDue(client)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
+                    <a (click)="calculationWitPreviousDue(clnt)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
         <hr>
-        <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.totalWithPreviousDue}} tk</span></p>
+        <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{clnt.totalWithPreviousDue}} tk</span></p>
 
-        <p style="font-size:18px"><b>Paid: </b> <span style="margin-left:50px"><input #paidAmount="ngModel" [(ngModel)]="client.paidAmount" name="paidAmount"  id="paidAmount" type="text" class="validate"
+        <p style="font-size:18px"><b>Paid: </b> <span style="margin-left:50px"><input #paidAmount="ngModel" [(ngModel)]="clnt.paidAmount" name="paidAmount"  id="paidAmount" type="text" class="validate"
                     style="width: 70px"></span></p>
-                    <a (click)="calculateCurrentdue(client)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
+                    <a (click)="calculateCurrentdue(clnt)" class="waves-effect waves-light btn btn-rounded ">Apply</a>
         <hr>
-        <p style="font-size:18px"><b>Curent Due: </b> <span style="margin-left:50px"><input #currentDue="ngModel" [(ngModel)]="client.currentDue" name="currentDue"  id="currrentDue" type="text"
+        <p style="font-size:18px"><b>Curent Due: </b> <span style="margin-left:50px"><input #currentDue="ngModel" [(ngModel)]="clnt.currentDue" name="currentDue"  id="currrentDue" type="text"
                     class="validate" style="width: 70px"></span></p>
 
         <div class="card-body ui-app__button-demo">
-            <a (click)="saveReport(client,newBookList)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Save</a>
+            <a (click)="saveReport(clnt,newBookList)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Save</a>
+            <a (click)="clearBook(newBookList)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Clear</a>
             <a *ngIf="billNo" class="waves-effect waves-light btn btn-rounded " style="font-size:20px" [routerLink]="['/ReportDetails/',billNo]">Print</a>
         </div>
 

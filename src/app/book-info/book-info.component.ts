@@ -13,7 +13,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class BookInfoComponent implements OnInit {
   book=new BookInfo();
-  data: BookInfo[] = [];
+
   categories:Category[]=[];
 
   selectedFiles: FileList;
@@ -24,15 +24,21 @@ export class BookInfoComponent implements OnInit {
   constructor(private bookInfoService:BookInfoService,
     private categoryService:CategoryService,
     private route:ActivatedRoute,
-    private snackBar: MatSnackBar) {
-     
+  private snackBar: MatSnackBar
+    ) {
+      
+     if(this.route.snapshot.paramMap.get('id')!=null){
       this.id = this.route.snapshot.paramMap.get('id');
+     }
+      
       if(this.id!=null){
+        console.log('cons id',this.id);
         this.bookInfoService.getBookInfo(this.id)
         .subscribe(data=>{
           this.book=data;
+          console.log('cons book info',this.book);
         });
-        console.log('cons',this.id);
+        
       }
       
   
@@ -67,21 +73,27 @@ export class BookInfoComponent implements OnInit {
   });
 
   this.Message='';
+  this.book.name=null;
+  this.book.basePrice=null;
+  this.book.publisher=null;
+  this.book.categoryId=null;
+  this.book.author=null;
+  this.book.publicherYear=null;
+ 
   }
 
   update(book){
    
     this.bookInfoService.updateBookInfo(book)
     .subscribe(data=>{});
-    
+  
     this.Message='Successfullay Updated !';
     this.snackBar.open(this.Message, this.action, {
     duration: 2000,
   });
   this.Message='';
 
- 
- 
+
     
   }
   delete(id){

@@ -2,7 +2,7 @@ export class BookInfo{
     id:number;
     name:string;
     basePrice:number;
-    categoryId:string;
+    categoryId:number;
     image;
     publisher:string;
     publicherYear:string;
@@ -10,4 +10,5 @@ export class BookInfo{
     discount:number;
     subTotal:number;
     billNo:string;
+    categoryName:string;
 }

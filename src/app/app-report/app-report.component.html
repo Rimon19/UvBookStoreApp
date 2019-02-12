@@ -1,34 +1,37 @@
 
 
  
-    <div class="row" id="content" #content>
+    <div class="row" id="pdf">
 
         <!-- Bill Header -->
-        <div style="text-align:center">
-            <p style="font-size: 18px; font-weight: bold;">University Book Center</p>
-            <p style="margin-top: -20px"><b>Address:</b> Gazipur Chourasta, Dhaka</p>
-            <p style="margin-top: -20px"><b>Phone:<span>0168045430</span></b></p>
-            <p style="margin-top: -20px"><b>Date:<span>21/07/2019</span></b></p>
-
+        <div class="row" >
+                <div style="text-align:center">
+                        <p style="font-size: 18px; font-weight: bold;">University Book Center</p>
+                        <p style="margin-top: -20px"><b>Address:</b> Gazipur Chourasta, Dhaka</p>
+                        <p style="margin-top: -20px"><b>Phone:<span>0168045430</span></b></p>
+                        <p style="margin-top: -20px"><b>Date:<span>{{date}}</span></b></p>
+            
+                    </div>
         </div>
+        
 
 
-        <div style="margin-bottom: -7px;">
-            <div>
+        <div class="row" style="margin-bottom: -7px;display:block;">
+            <div class="input-field col s6">
                 <h6><b>Client Name : </b><span>{{client.name}}</span></h6>
     
             </div>
-            <div>
+            <div class="input-field col s6">
                 <h6><b>Address : </b><span> {{client.address}} </span></h6>
             </div>
     
-            <div>
+            <div class="input-field col s6">
                 <h6><b>Phone : </b><span> {{client.mobile}} </span></h6>
             </div>
-            <div>
+            <div class="input-field col s3">
                 <h6><b>Client ID : </b><span>{{client.ClientId}} </span></h6>
             </div>
-            <div>
+            <div class="input-field col s3">
                 <h6><b>Bill No : </b><span>{{client.billNo}} </span></h6>
             </div>
     
@@ -37,64 +40,74 @@
     
         <!-- Bill Body -->
         <hr>
-
-              <table >
+        <div class="row" >
+            <div class="col s12">
+                    <table class="display" style="width:100%">
                                 
-                <tr>
-                               
-                    
-                    <th>Name</th>
-                    <th>pub:</th>
-                    <th>Author</th>
-                    <th>Price</th>
-                    <th>Discount</th>
-                    <th>total</th>
-                </tr>
-               
-                <tr  *ngFor="let book of filteredBookReportbybillNo">
-                    <td>{{book.name}}</td>            
-                    <td>{{book.publisher}}</td>
-                    <td>{{book.author}}</td>
-                    <td>{{book.basePrice}} Tk</td>
-                    <td>
-                        {{book.discount}} %
-    
-                    </td>
-                    <td>{{book.subTotal}}</td>
-                </tr>
-    
-    
-          </table>           
+                            <tr>
+                                           
+                                
+                                <th>Name</th>
+                                <th>pub:</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                                <th>Discount</th>
+                                <th>total</th>
+                            </tr>
+                           
+                            <tr  *ngFor="let book of filteredBookReportbybillNo">
+                                <td>{{book.name}}</td>            
+                                <td>{{book.publisher}}</td>
+                                <td>{{book.author}}</td>
+                                <td>{{book.basePrice}} Tk</td>
+                                <td>
+                                    {{book.discount}} %
+                
+                                </td>
+                                <td>{{book.subTotal}}</td>
+                            </tr>
+                
+                
+                      </table> 
+            </div>
+                
+        </div>
+
+                     
        
     
     
-        <div>
+        <div class="row" >
+            <div class="col s9"></div>
+            <div class="col s3">
+                    <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.total}} tk</span></p>
+    
+                    <p style="font-size:18px"><b>Packing: </b> <span style="margin-left:70px">{{client.packingCoast}} tk</span>
+                    </p>
+                    <p style="font-size:18px"><b>Commision: </b> <span style="margin-left:50px">{{client.commision}} tk</span>
+                    </p>
+                    <hr>
+        
+                    <p style="font-size:18px"><b>Total: </b> <span
+                            style="margin-left:85px">{{client.totalWithComiAndPackingCost}} tk</span></p>
+        
+                    <p style="font-size:18px"><b>Previous Due: </b> <span style="margin-left:30px">{{client.dueAmount}}
+                            tk</span></p>
+        
+                    <hr>
+                    <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.totalWithPreviousDue}}
+                            tk</span></p>
+        
+                    <p style="font-size:18px"><b>Paid: </b> <span style="margin-left:70px">{{client.paidAmount}} tk</span></p>
+                    <hr>
+                    <p style="font-size:18px"><b>Curent Due: </b> <span style="margin-left:50px"> {{client.currentDue}}
+                            tk</span></p>
+        
+        
+            </div>
             
             
-                <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.total}} tk</span></p>
-    
-                <p style="font-size:18px"><b>Packing: </b> <span style="margin-left:70px">{{client.packingCoast}} tk</span>
-                </p>
-                <p style="font-size:18px"><b>Commision: </b> <span style="margin-left:50px">{{client.commision}} tk</span>
-                </p>
-                <hr>
-    
-                <p style="font-size:18px"><b>Total: </b> <span
-                        style="margin-left:85px">{{client.totalWithComiAndPackingCost}} tk</span></p>
-    
-                <p style="font-size:18px"><b>Previous Due: </b> <span style="margin-left:30px">{{client.dueAmount}}
-                        tk</span></p>
-    
-                <hr>
-                <p style="font-size:18px"><b>Total: </b> <span style="margin-left:85px">{{client.totalWithPreviousDue}}
-                        tk</span></p>
-    
-                <p style="font-size:18px"><b>Paid: </b> <span style="margin-left:70px">{{client.paidAmount}} tk</span></p>
-                <hr>
-                <p style="font-size:18px"><b>Curent Due: </b> <span style="margin-left:50px"> {{client.currentDue}}
-                        tk</span></p>
-    
-    
+               
     
         
     
@@ -106,5 +119,6 @@
 
 
   
-
-<button (click)="downloadPdf()">download pdf</button>
+<div class="row" style="margin-left:40%">
+        <button (click)="makepdf()" class="btn btn-primary">download pdf</button>
+</div>

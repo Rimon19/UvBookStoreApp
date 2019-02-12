@@ -34,6 +34,7 @@ import { SearchClientReportComponent } from './search-client-report/search-clien
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { BookDetailsComponent } from './book-details/book-details.component';
+
 import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

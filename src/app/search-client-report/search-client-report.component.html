@@ -14,22 +14,24 @@
       style="font-size:20px" [routerLink]="['/ReportDetails/',c.billNo]">Search</a></td>
   </tr>
 </table> -->
+<div class="row">
+  <div class="input-field col s12">
+      <form class="example-form">
+          <input  #query (keyup)="filterReportByBillNO(query.value)" 
+          type="text" id="autocomplete-input-client"
+           placeholder="Search Book"
+            style="padding-left:50px"
+            matInput [matAutocomplete]="auto">
+ 
+          <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let c of filteredBillNo" [value]="c.billNo">
+                  {{c.billNo}}
+                  <a  class="waves-effect waves-light btn btn-rounded "  
+                  style="font-size:20px" [routerLink]="['/ReportDetails/',c.billNo]">select</a>
+              </mat-option>
+            </mat-autocomplete>
+      
+        </form>
+  </div>
 
-<form class="example-form">
-    <input #query (keyup)="filterReportByBillNO(query.value)"
-     type="text" id="autocomplete-input-country" 
-     placeholder="Search Bill No" 
-     style="padding-left:50px"
-     matInput [matAutocomplete]="auto">
-    <label class="label-icon" for="search">
-      <i class="material-icons" style="margin-top:13px;">search</i>
-    </label>
-    <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let c of filteredBillNo" [value]="c.billNo">
-            {{c.billNo}}
-            <a  class="waves-effect waves-light btn btn-rounded "  
-            style="font-size:20px" [routerLink]="['/ReportDetails/',c.billNo]">select</a>
-        </mat-option>
-      </mat-autocomplete>
-
-  </form>
+</div>

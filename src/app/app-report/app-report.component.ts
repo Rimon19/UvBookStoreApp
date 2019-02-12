@@ -4,9 +4,10 @@ import { BookReportService } from './../book-report.service';
 import { ClientReportService } from './../client-report.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ElementRef ,ViewChild } from '@angular/core';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas'; 
-
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas';  
+  
+declare function makePDF():any;
 
 @Component({
   selector: 'app-app-report',
@@ -14,6 +15,10 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./app-report.component.scss']
 })
 export class AppReportComponent implements OnInit {
+  // screen DPI / PDF DPI
+ readonly dpiRatio = 96 / 72;
+  pdfSrc = './pdf-test.pdf';
+
   @ViewChild('content') content:ElementRef;
   billNo;
   clientReports:Client[]=[];
@@ -21,7 +26,7 @@ export class AppReportComponent implements OnInit {
   client=new Client();
   bookReports:BookInfo[]=[];
   filteredBookReportbybillNo:BookInfo[]=[];
-
+ date;
   constructor(private route:ActivatedRoute,
     private clienReportServic:ClientReportService,
     private bookReportService:BookReportService) { 
@@ -30,6 +35,13 @@ export class AppReportComponent implements OnInit {
   }
 
   ngOnInit() {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate()+1;
+    var year = dateObj.getUTCFullYear();
+ 
+   this.date= day+'/'+month+'/'+year;
+
     this.billNo = this.route.snapshot.paramMap.get('billNo');
     console.log('ng-billNo from app-report',this.billNo); 
 
@@ -69,19 +81,40 @@ export class AppReportComponent implements OnInit {
   }
 
   downloadPdf(){
-  let doc=new jsPDF();
-  let specialElementsHandalers={
-    '#editor':function(element,renderer){
-      return true;
-    }
-  };
+  // let doc=new jsPDF();
+  // let specialElementsHandalers={
+  //   '#content':function(element,renderer){
+  //     return true;
+  //   }
+  // };
 
-  let content=this.content.nativeElement;
-  doc.fromHTML(content,15,15,{
-  'width':150,
+  // let content=this.content.nativeElement;
+  // doc.fromHTML(content,15,15,{
+  // 'width':150,
  
-  'elementHandlers':specialElementsHandalers
-  });
-  doc.save('report.pdf');
+  // 'elementHandlers':specialElementsHandalers
+  // });
+  // doc.save('report.pdf');
+
+  var data = document.getElementById('contentToConvert');  
+  html2canvas(data).then(canvas => {  
+    // Few necessary setting options  
+    var imgWidth = 208;   
+   var pageHeight = 295;    
+   var imgHeight = canvas.height * imgWidth / canvas.width;  
+   var heightLeft = imgHeight;  
+
+    const contentDataURL = canvas.toDataURL('image/png')  
+    let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+    var position = 0;  
+    pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+    pdf.save('MYPdf.pdf'); // Generated PDF   
+  });  
+}  
+  makepdf(){
+    makePDF();
   }
+
 }
+
+

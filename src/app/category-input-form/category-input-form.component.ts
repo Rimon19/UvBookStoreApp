@@ -17,7 +17,8 @@ export class CategoryInputFormComponent implements OnInit {
   constructor(private categoryServic:CategoryService,
     private route:ActivatedRoute,
     private router:Router,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar
+    ) {
 
       this.id = this.route.snapshot.paramMap.get('id');
       if(this.id!=null){
@@ -45,6 +46,7 @@ export class CategoryInputFormComponent implements OnInit {
     });
   
     this.Message='';
+    this.category.categoryName=null;
       // this.router.navigate(['/displayCategoryInfo']);
 
   }
