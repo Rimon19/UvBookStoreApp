@@ -22,7 +22,7 @@
           placeholder="Search Book"
            style="padding-left:50px"
            matInput [matAutocomplete]="billBooks">
-        <label class="label-icon" for="autocomplete-input-book"><i class="material-icons" style="margin-top:13px;">search</i></label>
+        <label class="label-icon" for="autocomplete-input-book"><i class="material-icons" style="margin-top:13px;"></i></label>
         <mat-autocomplete #billBooks="matAutocomplete">
             <mat-option *ngFor="let c of filteredBooks">
                 {{c.name}}
@@ -38,7 +38,7 @@
           type="text" id="autocomplete-input-client" 
           placeholder="Search Clients" style="padding-left:50px"
           matInput [matAutocomplete]="client">
-        <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;">search</i></label>
+        <label class="label-icon" for="search"><i class="material-icons" style="margin-top:13px;"></i></label>
     </div>
     <mat-autocomplete #client="matAutocomplete">
         <mat-option *ngFor="let c of filteredClients">

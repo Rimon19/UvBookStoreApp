@@ -37,7 +37,7 @@ export class AppReportComponent implements OnInit {
   ngOnInit() {
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate()+1;
+    var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
  
    this.date= day+'/'+month+'/'+year;

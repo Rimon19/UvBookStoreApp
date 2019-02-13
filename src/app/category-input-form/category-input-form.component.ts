@@ -3,6 +3,7 @@ import { CategoryService } from './../category.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import { valid } from 'semver';
 
 @Component({
   selector: 'app-category-input-form',
@@ -35,7 +36,9 @@ export class CategoryInputFormComponent implements OnInit {
    
   } 
 
-  save(category){
+  save(category:Category){
+   
+
    this.categoryServic.insertCategory(category)
    .subscribe(data=>{
    

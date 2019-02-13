@@ -63,9 +63,11 @@ export class BillingComponent implements OnInit {
   }
 
   updateBookList(book){
+    if(book.discount==undefined||book.discount==null){book.discount=0;}
   
     this.newBookList.map((todo, i) => {    
       if (todo.id == book.id){
+
          this.newBookList[i].discount=book.discount;
 
          const sTotal=(this.newBookList[i].basePrice*book.discount);
@@ -95,28 +97,27 @@ export class BillingComponent implements OnInit {
    
    }
  selectClient(clientId){
-  console.log(clientId);
-  let filterClents = (clientId) ?
-  this.clients.filter(p => p.id==clientId) :
-   this.clients;      
-   this.filteredClients=filterClents;  
-   this.filteredClients .forEach(element => {
-     this.clnt=element;
+ 
+  // let filterClents = (clientId) ?
+  // this.clients.filter(p => p.id==clientId) :
+  //  this.clients;      
+  //  this.filteredClients=filterClents;  
+  //  this.filteredClients .forEach(element => {
+  //    this.clnt=element;
      
-   });
+  //  });
 
    
-  //  if (clientId) this.clientService.getClient(clientId)
-  // .subscribe(p => {
-  //   this.client= p;
-  //   console.log(this.client);
-  // });
+   if (clientId) this.clientService.getClient(clientId)
+  .subscribe(p => {
+    this.clnt= p;
+    
+  });
 
 }
 
    filterBooks(bookSearch: string) { 
-     console.log(bookSearch);
-     console.log(this.books);
+    
     if (bookSearch && bookSearch.length) {
    
       let filteredBooks = (bookSearch) ?
@@ -137,26 +138,75 @@ export class BillingComponent implements OnInit {
    }
 
    calculationWithPackinCoastAndCommision(clientInfo){
-     console.log(clientInfo);
+    
     this.clnt=clientInfo;
 
-    console.log(this.clnt);
-   const packhingCost=this.clnt.packingCoast;
-   const total=this.total;
+if(this.clnt.packingCoast==undefined||this.clnt.packingCoast==null){
+  this.clnt.packingCoast=0;
+}
+if(this.clnt.commision==undefined||this.clnt.commision==null){
+  this.clnt.commision=0;
+}
+  
 
-    this.clnt.total=( +total + +packhingCost);
+    this.clnt.total=( +this.total + +this.clnt.packingCoast);
   
     this.clnt.totalWithComiAndPackingCost=(this.clnt.total-this.clnt.commision);
-  
+    console.log(this.clnt.totalWithComiAndPackingCost);
     
    }
    calculationWitPreviousDue(clientInfo){
+
+    if(this.clnt.packingCoast==undefined||this.clnt.packingCoast==null){
+      this.clnt.packingCoast=0;
+    }
+    if(this.clnt.commision==undefined||this.clnt.commision==null){
+      this.clnt.commision=0;
+    }
+    if(this.clnt.totalWithComiAndPackingCost==undefined||this.clnt.totalWithComiAndPackingCost==null){
+      this.clnt.commision=this.total;
+    }
+
+          
+    if(this.clnt.totalWithComiAndPackingCost==undefined||this.clnt.totalWithComiAndPackingCost==null){
+      this.clnt.totalWithComiAndPackingCost=0;
+    }
+    if(this.clnt.dueAmount==undefined||this.clnt.dueAmount==null){
+      this.clnt.dueAmount=0;
+    }
     this.clnt=clientInfo;
     this.clnt.totalWithPreviousDue=(+this.clnt.totalWithComiAndPackingCost + +this.clnt.dueAmount);
    }
    calculateCurrentdue(client){
     this.clnt=client;
+
+    if(this.clnt.packingCoast==undefined||this.clnt.packingCoast==null){
+      this.clnt.packingCoast=0;
+    }
+    if(this.clnt.commision==undefined||this.clnt.commision==null){
+      this.clnt.commision=0;
+    }
+          
+    if(this.clnt.totalWithComiAndPackingCost==undefined||this.clnt.totalWithComiAndPackingCost==null){
+      this.clnt.totalWithComiAndPackingCost=this.total;
+    }
+    if(this.clnt.dueAmount==undefined||this.clnt.dueAmount==null){
+      this.clnt.dueAmount=0;
+    }
+    if(this.clnt.totalWithPreviousDue==undefined||this.clnt.totalWithPreviousDue==null){
+      this.clnt.totalWithPreviousDue=this.clnt.totalWithComiAndPackingCost;
+    }
+    if(this.clnt.paidAmount==undefined||this.clnt.paidAmount==null){
+      this.clnt.paidAmount=0;
+    }
+    if(this.clnt.finalTotal==undefined||this.clnt.finalTotal==null){
+      this.clnt.finalTotal=this.clnt.totalWithPreviousDue;
+    }
+
+
+    
     if(this.clnt.totalWithPreviousDue>0){
+
       this.clnt.currentDue=(this.clnt.totalWithPreviousDue-this.clnt.paidAmount);
     }
     else{
@@ -168,12 +218,56 @@ export class BillingComponent implements OnInit {
 
    clearBook(newBookList){
     this.newBookList=[];
+    this.newBookList.forEach(element => {
+      element.discount=null;
+    });
+    this.clnt=new Client();    
+    this.total=null;
+    this.clnt.packingCoast=null;
+    this.clnt.commision=null;
+    this.clnt.totalWithComiAndPackingCost=null;
+    this.clnt.dueAmount=null;
+    this.clnt.totalWithPreviousDue=null;
+    this.clnt.paidAmount=null;
+    this.clnt.currentDue=null;
    }
    saveReport(client,newBookList){
 
-  console.log(client);
-  this.clnt=client;
-  console.log('client info', this.clnt);
+    //initial checking 
+    if(client.name!=undefined&&newBookList[0].name!=undefined&&client.name!=null&&newBookList[0].name!=null){
+
+// furture checking 
+
+if(this.clnt.packingCoast==undefined||this.clnt.packingCoast==null){
+  this.clnt.packingCoast=0;
+}
+if(this.clnt.commision==undefined||this.clnt.commision==null){
+  this.clnt.commision=0;
+}
+      
+if(this.clnt.totalWithComiAndPackingCost==undefined||this.clnt.totalWithComiAndPackingCost==null){
+  this.clnt.totalWithComiAndPackingCost=this.total;
+}
+if(this.clnt.dueAmount==undefined||this.clnt.dueAmount==null){
+  this.clnt.dueAmount=0;
+}
+if(this.clnt.totalWithPreviousDue==undefined||this.clnt.totalWithPreviousDue==null){
+  this.clnt.totalWithPreviousDue=this.clnt.totalWithComiAndPackingCost;
+}
+if(this.clnt.paidAmount==undefined||this.clnt.paidAmount==null){
+  this.clnt.paidAmount=0;
+}
+if(this.clnt.currentDue==undefined||this.clnt.currentDue==null){
+  this.clnt.currentDue=0;
+}
+if(this.clnt.total==undefined||this.clnt.total==null){
+  this.clnt.total=this.total;
+}
+if(this.clnt.finalTotal==undefined||this.clnt.finalTotal==null){
+  this.clnt.finalTotal=this.clnt.totalWithPreviousDue;
+}
+//saving data
+
     this.clientReportService.getAllClientReport()
     .subscribe(data=>{
      this.clientReports=data;
@@ -197,6 +291,8 @@ export class BillingComponent implements OnInit {
     });
    
 
+  }
+   
     
 
    
