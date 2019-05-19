@@ -7,13 +7,16 @@
       <div class="row">
           <div class="input-field col s6">
               <input #categoryName="ngModel" [(ngModel)]="category.categoryName" placeholder="Category Name" name="categoryName" id="categoryName"   type="text" class="validate">
+              <div class="validate" *ngIf="categoryName.touched && categoryName.invalid">
+                <div *ngIf="categoryName.errors.required">Price is required.</div>
               
+              </div>
           </div>
 
       </div>
 
       <div class="card-body ui-app__button-demo">
-          <a *ngIf="!id" (click)="save(category)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+          <a *ngIf="!id&&categoryName.valid" (click)="save(category)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
           <a *ngIf="id" (click)="update(category)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Update</a>
           <a *ngIf="id" (click)="delete(id)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Delete</a>
           

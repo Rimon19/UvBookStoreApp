@@ -33,35 +33,39 @@ export class ClientInputFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  save(client){
-    this.clientService.getAllClient()
-    .subscribe(res => {
-      this.clients = res;
-      client.ClientId="clnt0"+(this.clients.length+1);
+  save(client:Client){
+    if(client.name!=null&&client.name!=''){
+      console.log(client);
+      this.clientService.getAllClient()
+      .subscribe(res => {
+        this.clients = res;
+        client.ClientId="clnt0"+(this.clients.length+1);
+        
+        this.clientService.insertClient(client).subscribe(data=>{
       
-      this.clientService.insertClient(client).subscribe(data=>{
-    
+        });
+        this.Message='Successfullay Saved !';
+        this.snackBar.open(this.Message, this.action, {
+        duration: 2000,
       });
-      this.Message='Successfullay Saved !';
-      this.snackBar.open(this.Message, this.action, {
-      duration: 2000,
-    });
-  
-    this.Message='';  
-       this.client.name=null;
-       this.client.address=null;
-       this.client.mobile=null;
-       this.client.dueAmount=null;
-       this.client.advanceAmount=null;
-    }, err => {
-    });
     
+      this.Message='';  
+         this.client.name=null;
+         this.client.address=null;
+         this.client.mobile=null;
+         this.client.dueAmount=null;
+         this.client.advanceAmount=null;
+      }, err => {
+      });
+      
+    }
+   
  
 
   }
 
-  update(Client){
-   
+  update(Client:Client){
+   if(Client.name!=null){
     this.clientService.updateClient(Client)
     .subscribe(data=>{
      this.client=null;
@@ -73,6 +77,8 @@ export class ClientInputFormComponent implements OnInit {
 
   this.Message='';
    // this.router.navigate(['/displayCategoryInfo']);
+   }
+    
   }
 
   delete(id){

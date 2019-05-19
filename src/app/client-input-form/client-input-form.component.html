@@ -11,7 +11,10 @@
                 </div> -->
             <div class="input-field col s6">
                 <input #name="ngModel" [(ngModel)]="client.name" placeholder="Client Name" name="name" id="name" type="text" class="validate">
-                
+                <div style="color:red" class="validate" *ngIf="name.touched && name.invalid">
+                    <div *ngIf="name.errors.required">Name is required.</div>
+                  
+                  </div>
             </div>
         </div>
 
@@ -42,7 +45,7 @@
 
         <input type="hidden" #ClientId="ngModel" [(ngModel)]="client.ClientId" name="ClientId">
         <div class="card-body ui-app__button-demo">
-            <a *ngIf="!id" (click)="save(client)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
+            <a *ngIf="!id&&name.valid" (click)="save(client)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">SAVE</a>
             <a *ngIf="id" (click)="update(client)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Update</a>
             <a *ngIf="id" (click)="delete(id)" class="waves-effect waves-light btn btn-rounded " style="font-size:20px">Delete</a>
             

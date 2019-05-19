@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import { valid } from 'semver';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-category-input-form',
@@ -37,21 +38,25 @@ export class CategoryInputFormComponent implements OnInit {
   } 
 
   save(category:Category){
-   
+    
 
-   this.categoryServic.insertCategory(category)
-   .subscribe(data=>{
-   
-      });
-      this.Message='Successfullay Saved !';
-      this.snackBar.open(this.Message, this.action, {
-      duration: 2000,
-    });
+if(category.categoryName!=null&&category.categoryName!=''){
+  console.log(category);
+  this.categoryServic.insertCategory(category)
+  .subscribe(data=>{
   
-    this.Message='';
-    this.category.categoryName=null;
-      // this.router.navigate(['/displayCategoryInfo']);
+     });
+     this.Message='Successfullay Saved !';
+     this.snackBar.open(this.Message, this.action, {
+     duration: 2000,
+   });
+ 
+   this.Message='';
+   this.category.categoryName=null;
+     // this.router.navigate(['/displayCategoryInfo']);
 
+}
+  
   }
 
   update(category){

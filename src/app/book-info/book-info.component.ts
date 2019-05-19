@@ -58,28 +58,32 @@ export class BookInfoComponent implements OnInit {
   //   this.selectedFiles = event.target.files;
   // }
  
-  save(objBook){
+  save(objBook:BookInfo){
     // this.currentFileUpload = this.selectedFiles.item(0);  
     // objBook.image=this.currentFileUpload;
-    this.bookInfoService.insertBookInfo(objBook)
-    .subscribe(data=>{
-    
+ if(objBook.name!=null&&objBook.categoryId!=null&&objBook.name!=''&&objBook.categoryId!=0){
+   console.log(objBook);
+  this.bookInfoService.insertBookInfo(objBook)
+  .subscribe(data=>{
+  
 
-    });
-
-    this.Message='Successfullay Saved !';
-    this.snackBar.open(this.Message, this.action, {
-    duration: 2000,
   });
 
-  this.Message='';
-  this.book.name=null;
-  this.book.basePrice=null;
-  this.book.publisher=null;
-  this.book.categoryId=null;
-  this.book.author=null;
-  this.book.publicherYear=null;
- 
+  this.Message='Successfullay Saved !';
+  this.snackBar.open(this.Message, this.action, {
+  duration: 2000,
+});
+
+this.Message='';
+this.book.name=null;
+this.book.basePrice=null;
+this.book.publisher=null;
+this.book.categoryId=null;
+this.book.author=null;
+this.book.publicherYear=null;
+
+}
+
   }
 
   update(book){
